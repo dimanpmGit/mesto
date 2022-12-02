@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
+  <script async src="./scripts/main.js"></script>
 </head>
 <body class="page">
   <div class="page__container">
@@ -17,7 +18,10 @@
           <div class="profile__info-wrapper">
             <img class="avatar" src="./images/Avatar.png" alt="">
             <div class="profile__info">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <div class="profile__name-wrapper">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button class="profile__edit-button"></button>
+              </div>
               <p class="profile__description">Исследователь океана</p>
             </div>
           </div>
@@ -69,7 +73,7 @@
         </section>
         <footer class="footer">
           <p class="footer__text">
-            © 2020 Mesto Russia
+            © 2022 Mesto Russia
           </p>
         </footer>
     </main>
@@ -80,6 +84,7 @@
         <input class="popup__name" type="text">
         <input class="popup__description" type="text">
         <button class="popup__save-button">Сохранить</button>
+        <button class="popup__close-button"></button>
       </form>
     </div>
   </div>

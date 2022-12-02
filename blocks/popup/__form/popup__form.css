@@ -8,21 +8,29 @@
   padding: 34px 36px 37px;
   box-sizing: border-box;
   z-index: 1;
-  position: absolute;
+  position: fixed;
   top: 50vh;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);*/
+  position: fixed;
+  transition: opacity .3s ease;
 }
-
+/*
 .popup__form::after {
   content: '';
-  width: 32px;
-  height: 32px;
+
   background-image: url(../../../images/close-icon.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border: 1px solid red;
-  /*transform: translate(1204%, -234%);*/
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: -40px -40px 0 0;
+  box-sizing: border-box;
 }
+
+.popup__form:hover::after {
+  opacity: .8;
+}*/

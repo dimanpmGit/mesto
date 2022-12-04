@@ -21,3 +21,22 @@
   background-size: cover;
   background-position: center;
 }
+
+@media screen and (max-width: 768px) {
+  .add-button {
+    width: 50%;
+    margin-top: 36px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .add-button {
+    width: 100%;
+    margin-top: 31px;
+  }
+
+  .add-button::before {
+    width: 16px;
+    height: 16px;
+  }
+}

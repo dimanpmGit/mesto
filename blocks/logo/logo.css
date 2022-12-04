@@ -1,5 +1,5 @@
 .logo {
-  width: 142px;
+  max-width: 142px;
   height: 33px;
   margin: 0;
   padding: 0;
@@ -8,4 +8,11 @@
   background-size: cover;
   background-position: left bottom;
   cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .logo {
+    max-width: 104px;
+    height: 24px;
+  }
 }

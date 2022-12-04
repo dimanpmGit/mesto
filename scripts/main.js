@@ -1,9 +1,8 @@
 const popup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__close-button');
-const popupForm = document.querySelector('.popup__form');
-const popupCover = document.querySelector('.popup__cover');
-const popupName = popupForm.querySelector('.popup__name');
-const popupDesc = popupForm.querySelector('.popup__description');
+const popupContainer = document.querySelector('.popup__container');
+const popupName = popupContainer.querySelector('.popup__name');
+const popupDesc = popupContainer.querySelector('.popup__description');
 const profile = document.querySelector('.profile');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
@@ -13,7 +12,6 @@ const elementsHeart = document.querySelectorAll('.element__heart');
 function openPopup(event) {
   event.preventDefault();
   popup.classList.add('popup_opened');
-  console.log({profile});
   popupName.value = profileName.textContent;
   popupDesc.value = profileDesc.textContent;
 }
@@ -25,13 +23,13 @@ function closePopup() {
 editButton.addEventListener('click', openPopup);
 closePopupButton.addEventListener('click', closePopup);
 
-popupCover.addEventListener('click', function(event) {
+popup.addEventListener('click', function(event) {
     if (!event.defaultPrevented) {
         closePopup();
     }
 })
 
-popupForm.addEventListener('click', function(event) {
+popupContainer.addEventListener('click', function(event) {
     event.preventDefault();
 })
 

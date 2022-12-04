@@ -9,10 +9,4 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  cursor: pointer;
-  transition: opacity .3s ease;
-}
-
-.profile__edit-button:hover {
-  opacity: .8;
 }

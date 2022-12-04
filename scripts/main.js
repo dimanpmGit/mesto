@@ -9,6 +9,7 @@ const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
 const elementsHeart = document.querySelectorAll('.element__heart');
 const saveButton = document.querySelector('.popup__save-button');
+const enterButton = document.q
 
 function openPopup(event) {
   event.preventDefault();
@@ -55,7 +56,7 @@ let jobInput = formElement.querySelector('.popup__description');// Воспол�
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit () {
+function handleFormSubmit (event) {
   event.preventDefault();
   profileName.textContent = popupName.value;
   profileDesc.textContent = popupDesc.value;
@@ -74,3 +75,8 @@ function handleFormSubmit () {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 saveButton.addEventListener('click', handleFormSubmit); 
+popup.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    handleFormSubmit(event);
+  }
+});

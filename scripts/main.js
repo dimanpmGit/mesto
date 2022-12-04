@@ -38,20 +38,12 @@ popupForm.addEventListener('click', function(event) {
 elementsHeart.forEach(element => {
   element.addEventListener('click', function(event){
     event.preventDefault();
-    console.log({element});
+    if (element.classList.contains('active')) {
+      element.classList.remove('active');
+      element.setAttribute('src', './images/heart.svg');
+    } else {
+      element.classList.add('active');
+      element.setAttribute('src', './images/heart-active.svg');
+    }
   });
 })
-//addEventListener('click', changeHeart);
-
-function changeHeart(element) {
-  //event.preventDefault();
-  //console.log({element});
-  /*
-  elementHeart.classList.forEach(element => {
-    console.log(`classList.element = ${element}`);
-  });*/
-  /*
-  let arrElements = elementHeart.classList;
-  console.log(arrElements.contains('link'));*/
-  //console.log({elementHeart.classList});
-}

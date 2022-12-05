@@ -12,7 +12,6 @@
   top: 50vh;
   left: 50%;
   transform: translate(-50%, -50%);
-  position: fixed;
 }
 
 @media screen and (max-width: 520px) {

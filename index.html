@@ -6,86 +6,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
-  <script async src="./scripts/main.js"></script>
 </head>
 <body class="page">
   <div class="page__container">
     <header class="header">
-      <div class="logo link"></div>
+      <a class="logo" href="./index.html"></a>
     </header>
     <main class="content">
         <section class="profile">
           <div class="profile__info-wrapper">
-            <img class="avatar" src="./images/Avatar.png" alt="">
+            <img class="avatar" src="./images/Avatar.png" alt="Жак-Ив Кусто">
             <div class="profile__info">
               <div class="profile__name-wrapper">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button class="profile__edit-button link"></button>
+                <button class="profile__edit-button link" type="button"></button>
               </div>
               <p class="profile__description">Исследователь океана</p>
             </div>
           </div>
-          <button class="add-button link"></button>
+          <button class="profile__add-button link" type="button"></button>
         </section>
         <section class="elements">
-          <div class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-            <div class="element__info">
-              <p class="element__name">Карачаевск</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
-          <div class="element">
-            <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
-            <div class="element__info">
-              <p class="element__name">Гора Эльбрус</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
-          <div class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
-            <div class="element__info">
-              <p class="element__name">Домбай</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
-          <div class="element">
-            <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
-            <div class="element__info">
-              <p class="element__name">Гора Эльбрус</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
-          <div class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
-            <div class="element__info">
-              <p class="element__name">Домбай</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
-          <div class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-            <div class="element__info">
-              <p class="element__name">Карачаево&#8209;Черкесия</p>
-              <img class="element__heart link" src="./images/heart.svg"></img>
-            </div>
-          </div>
+          <ul class="elements__list">
+            <li class="element">
+              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+              <div class="element__info">
+                <h3 class="element__name">Карачаевск</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+              <div class="element__info">
+                <h3 class="element__name">Гора Эльбрус</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
+              <div class="element__info">
+                <h3 class="element__name">Домбай</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
+              <div class="element__info">
+                <h3 class="element__name">Гора Эльбрус</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
+              <div class="element__info">
+                <h3 class="element__name">Домбай</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+            <li class="element">
+              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+              <div class="element__info">
+                <h3 class="element__name">Карачаево&#8209;Черкесия</h3>
+                <button class="element__heart-button" type="button"></button>
+              </div>
+            </li>
+          </ul>
         </section>
         <footer class="footer">
           <p class="footer__text">
-            © 2022 Mesto Russia
+            &copy; 2022 Mesto Russia
           </p>
         </footer>
     </main>
     <div class="popup">
-      <form class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__name popup__input-text" type="text">
-        <input class="popup__description popup__input-text" type="text">
-        <button class="popup__save-button">Сохранить</button>
-        <button class="popup__close-button link"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__container" name="popup-form">
+        <input class="popup__name popup__input-text" name="popup-name" type="text">
+        <input class="popup__description popup__input-text" name="popup-description" type="text">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+        <button class="popup__close-button link" type="button"></button>
       </form>
     </div>
   </div>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>

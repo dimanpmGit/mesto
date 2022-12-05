@@ -7,7 +7,7 @@ const profile = document.querySelector('.profile');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
-const elementsHeart = document.querySelectorAll('.element__heart');
+const elementsHeart = document.querySelectorAll('.element__heart-button');
 
 function openPopup(event) {
   event.preventDefault();

@@ -7,13 +7,7 @@ const profile = document.querySelector('.profile');
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
-<<<<<<< HEAD
 const elementsHeart = document.querySelectorAll('.element__heart-button');
-=======
-const elementsHeart = document.querySelectorAll('.element__heart');
-const saveButton = document.querySelector('.popup__save-button');
-const enterButton = document.q
->>>>>>> 4b4405c72792cb58b303e5341d1784432256b19c
 
 function openPopup(event) {
   event.preventDefault();

@@ -8,10 +8,8 @@
   padding: 34px 36px 37px;
   box-sizing: border-box;
   z-index: 2;
-  position: fixed;
-  top: 50vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  position: relative;
 }
 
 @media screen and (max-width: 520px) {

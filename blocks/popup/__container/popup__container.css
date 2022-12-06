@@ -15,12 +15,12 @@
 @media screen and (max-width: 520px) {
   .popup__container {
     max-width: 300px;
+    padding: 25px 22px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .popup__container {
     max-width: 282px;
-    padding: 25px 22px;
   }
 }

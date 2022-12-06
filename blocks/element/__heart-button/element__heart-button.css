@@ -1,5 +1,7 @@
 .element__heart-button {
-  width: 22px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  min-width: 22px;
   height: 19px;
   border: none;
   background: none;
@@ -10,6 +12,7 @@
   background-size: cover;
   cursor: pointer;
   transition: opacity .3s ease;
+  box-sizing: border-box;
 }
 
 .element__heart-button:hover {

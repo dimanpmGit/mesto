@@ -3,15 +3,23 @@
   margin: 50px 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 282px);
   grid-template-rows: repeat(2, 1fr);
   column-gap: 17px;
   row-gap: 20px;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 960px) {
   .elements__list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 282px);
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .elements__list {
+    grid-template-columns: 282px;
     grid-template-rows: repeat(6, 1fr);
     justify-items: center;
     margin-top: 34px;

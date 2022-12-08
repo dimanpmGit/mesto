@@ -57,14 +57,3 @@ popup.addEventListener('keypress', function (event) {
     handleFormSubmit(event);
   }
 });
-
-//Чтобы попап не закрывался при нажатии на форму
-popupContainer.addEventListener('click', function (event) {
-  event.preventDefault();
-});
-
-popup.addEventListener('click', function (event) {
-  if (!event.defaultPrevented) {
-    closePopup();
-  }
-});

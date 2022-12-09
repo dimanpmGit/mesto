@@ -51,9 +51,3 @@ formElement.addEventListener('submit', handleFormSubmit);
 editButton.addEventListener('click', openPopup);
 
 closePopupButton.addEventListener('click', closePopup);
-
-popup.addEventListener('keypress', function (event) {
-  if (event.key === 'Enter') {
-    handleFormSubmit(event);
-  }
-});

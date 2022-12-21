@@ -35,17 +35,7 @@
           </p>
         </footer>
     </main>
-    <div class="popup">
-      <div class="popup__container">
-        <button class="popup__close-button link" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
-          <input class="popup__input popup__input_type_name" name="popup-name" type="text" placeholder="Имя">
-          <input class="popup__input popup__input_type_description" name="popup-description" type="text" placeholder="Описание">
-          <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
+    <div class="popup"></div>
   </div>
   <template id="card-item-template">
     <li class="element">
@@ -56,7 +46,18 @@
       </div>
     </li>
   </template>
-
+  <template id="popup-template">
+    <div class="popup__container">
+      <button class="popup__close-button link" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="popup-form">
+        <input class="popup__input popup__input_type_name" name="popup-name" type="text" placeholder="Имя">
+        <input class="popup__input popup__input_type_description" name="popup-description" type="text"
+          placeholder="Описание">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </template>
   <script src="./scripts/main.js"></script>
 </body>
 </html>

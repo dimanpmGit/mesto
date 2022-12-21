@@ -27,50 +27,7 @@
           <button class="profile__add-button link" type="button"></button>
         </section>
         <section class="elements">
-          <ul class="elements__list">
-            <li class="element">
-              <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
-              <div class="element__info">
-                <h2 class="element__name">Карачаевск</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/elbrus.jpg" alt="Гора Эльбрус">
-              <div class="element__info">
-                <h2 class="element__name">Гора Эльбрус</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/dombai.jpg" alt="Домбай">
-              <div class="element__info">
-                <h2 class="element__name">Домбай</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/altay-aktash.jpg" alt="Алтай Акташский ретранслятор">
-              <div class="element__info">
-                <h2 class="element__name">Алтай Акташ</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/altay-mars.jpg" alt="Алтай Марс">
-              <div class="element__info">
-                <h2 class="element__name">Алтай Марс</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-            <li class="element">
-              <img class="element__image" src="./images/altay-geizer-lake.jpg" alt="Алтай Гейзерное озеро">
-              <div class="element__info">
-                <h2 class="element__name">Алтай Гейзерное озеро</h2>
-                <button class="element__heart-button" type="button"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="elements__list"></ul>
         </section>
         <footer class="footer">
           <p class="footer__text">
@@ -90,6 +47,16 @@
       </div>
     </div>
   </div>
+  <template id="card-item-template">
+    <li class="element">
+      <img class="element__image">
+      <div class="element__info">
+        <h2 class="element__name"></h2>
+        <button class="element__heart-button"></button>
+      </div>
+    </li>
+  </template>
+
   <script src="./scripts/main.js"></script>
 </body>
 </html>

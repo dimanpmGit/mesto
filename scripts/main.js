@@ -43,6 +43,7 @@ const cardsContainer = document.querySelector('.elements__list');
 const createCard = (cardItem) => {
   const string = `<li class="element">
       <img class="element__image">
+      <button class="element__trash-button"></button>
       <div class="element__info">
         <h2 class="element__name"></h2>
         <button class="element__heart-button"></button>
@@ -54,6 +55,7 @@ const createCard = (cardItem) => {
   const name = container.querySelector('.element__name');
   const img = container.querySelector('.element__image');
   const heartButton = container.querySelector('.element__heart-button');
+  const trashButton = container.querySelector('.element__trash-button');
   name.textContent = cardItem.name;
   img.setAttribute('src', cardItem.link);
   img.setAttribute('alt', cardItem.name);
@@ -63,10 +65,11 @@ const createCard = (cardItem) => {
   /*
     Лайк карточки
   */
-  heartButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    heartButton.classList.toggle('element__heart-button_active');
-  })
+  heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
+  /*
+    Удаление карточки
+  */
+  trashButton.addEventListener('click', () => trashButton.parentElement.remove());
 
   return container.firstElementChild;
 }

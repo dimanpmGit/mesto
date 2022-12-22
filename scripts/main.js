@@ -95,7 +95,7 @@ const initialPopups = [
     type: 'popup__container_edit-profile',
     title: 'Редактировать профиль',
     buttonName: 'Сохранить',
-    initialiseInput: 'true',
+    //initialiseInput: 'true',
     placeholderTop: 'Имя',
     placeholderBottom: 'Описание'
   },
@@ -103,7 +103,7 @@ const initialPopups = [
     type: 'popup__container_add-card',
     title: 'Новое место',
     buttonName: 'Сохранить',
-    initialiseInput: null,
+    //initialiseInput: null,
     placeholderTop: 'Название',
     placeholderBottom: 'Ссылка на страницу'
   }
@@ -189,12 +189,18 @@ const jobInput = formElement.querySelector('.popup__input_type_description');// 
 // она никуда отправляться не будет
 function handleFormSubmit (event) {
   event.preventDefault();
-  console.log(event.target.parentElement.id);
   const inputTop = event.target.querySelector('.popup__input_type_name');
   const inputBottom = event.target.querySelector('.popup__input_type_description');
   if (event.target.parentElement.id === 'popup__container_edit-profile') {
     profileName.textContent = inputTop.value;
     profileDesc.textContent = inputBottom.value;
+  }
+  else if (event.target.parentElement.id === 'popup__container_add-card') {
+    const cardItem = {
+      name: inputTop.value,
+      link: inputBottom.value
+    }
+    cardsContainer.prepend(createCard(cardItem));
   }
   inputTop.value = '';
   inputBottom.value = '';

@@ -7,9 +7,8 @@ const templateAdd = document.querySelector('#popup-template-add');
 const templateImage = document.querySelector('#popup-template-image');
 const popup = document.querySelector('.popup');
 
-/*
-Инициализировать первые 6 карточек
-*/
+
+//Инициализировать первые 6 карточек
 const initialCards = [
   {
     name: 'Архыз',
@@ -39,10 +38,7 @@ const initialCards = [
 
 const cardsContainer = document.querySelector('.elements__list');
 
-
-/*
-Создать одну карточку
-*/
+//  Создать одну карточку
 const createCard = (cardItem) => {
   const string = `<li class="element">
       <img class="element__image">
@@ -66,18 +62,15 @@ const createCard = (cardItem) => {
   heartButton.setAttribute('type', 'button');
 
   //Обработка событий
-  /*
-    Лайк карточки
-  */
+  
+  //  Лайк карточки
   heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
-  /*
-    Удаление карточки
-  */
+  
+  //  Удаление карточки
   trashButton.addEventListener('click', () => trashButton.parentElement.remove());
-  /*
-    Просмотр фотографии карточки
-  */
-  image.addEventListener('click', () => {
+  
+  //  Просмотр фотографии карточки
+    image.addEventListener('click', () => {
     renderPopupImage(templateImage);
   });
 
@@ -92,9 +85,8 @@ cardsContainer.append(...initialCards.map((item) => {
   return createCard(item);
 }))
 
-/*
-  Создание попапов
-*/
+
+//  Создание попапов
 //const popupContainerImage = template.content.querySelector('.popup__container_image').cloneNode(true);
 const createPopupContainer = (template) => {
   const popupContainer = template.content.querySelector('.popup__container').cloneNode(true);
@@ -106,12 +98,12 @@ const createPopupContainer = (template) => {
     inputTop.value = profileName.textContent;
     inputBottom.value = profileDesc.textContent;
   }
-  // Закрытие попап
+  //  Закрытие попап
   popupContainer.querySelector('.popup__close-button').addEventListener('click', () => {
     closePopup(popupContainer);
   });
 
-  // Изменение профиля
+  //  Изменение профиля
   popupContainer.querySelector('.popup__form').addEventListener('submit', (event) => {
     event.preventDefault();
     //console.log(event.target.name);
@@ -131,9 +123,8 @@ const createPopupContainer = (template) => {
   return popupContainer;
 }
 
-/*
-  Попап просмотра картинки из карточки
-*/
+
+//  Попап просмотра картинки из карточки
 const createPopupContainerImage = (template) => {
   const popupContainer = template.content.querySelector('.popup__container_image').cloneNode(true);
   const popupImage = popupContainer.querySelector('.popup__image');
@@ -145,18 +136,25 @@ const createPopupContainerImage = (template) => {
   popupImageName.textContent = event.target.parentElement.querySelector('.element__name').textContent;
 
   
-  // Закрытие попап
+  //  Закрытие попап
   popupContainer.querySelector('.popup__close-button').addEventListener('click', () => {
+    popup.classList.remove('popup_image');
     closePopup(popupContainer);
   });
 
   return popupContainer;
 }
 
+
+//  Закрытие попапов
 const closePopup = (el) => {
-  el.remove();
   popup.classList.remove('popup_opened');
+  //  Задержка для плавного закрытия попапов
+  setTimeout(() => {
+    el.remove();
+  }, 500);
 }
+
 
 const renderPopup = (template) => {
   popup.append(createPopupContainer(template));
@@ -166,7 +164,7 @@ const renderPopupImage = (template) => {
   popup.append(createPopupContainerImage(template));
 }
 
-// Обработка событий страницы
+//  Обработка событий страницы
 editButton.addEventListener('click', () => {
   renderPopup(templateEdit);
 });

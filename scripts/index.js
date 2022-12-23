@@ -94,7 +94,7 @@ const showPopup = (popupType) => {
     popupImage.setAttribute('alt', event.target.alt);
     popupImageName.textContent = event.target.closest('.element').querySelector('.element__name').textContent;
     popupCard.classList.add('popup_opened');
-    popupContainer = popupCard.querySelector('.popup__container_image');
+    popupContainer = popupCard.querySelector('.popup__container-image');
     popupContainer.querySelector('.popup__close-button').addEventListener('click', () => {
       closePopup(popupCard);
     });

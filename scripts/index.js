@@ -9,7 +9,7 @@ const inputBottomAdd = popupAdd.querySelector('.popup__input_type_bottom');
 const popupEdit = document.querySelector('.popup_edit');
 const inputTopEdit = popupEdit.querySelector('.popup__input_type_top');
 const inputBottomEdit = popupEdit.querySelector('.popup__input_type_bottom');
-const popupCard = document.querySelector('.popup_card');
+const popupCard = document.querySelector('.popup_image');
 const popupImage = popupCard.querySelector('.popup__image');
 const popupImageName = popupCard.querySelector('.popup__image-name');
 const cardsContainer = document.querySelector('.elements__list');
@@ -38,8 +38,7 @@ const createCard = (cardItem) => {
   
   //  Просмотр фотографии карточки
   image.addEventListener('click', () => {
-    //renderPopupImage(templateImage);
-    showPopup('popup_card');
+    showPopup('popup_image');
   });
 
   return card;
@@ -90,11 +89,10 @@ const showPopup = (popupType) => {
       closePopup(popupAdd);
     });
   } 
-  else if (popupType === 'popup_card') {
+  else if (popupType === 'popup_image') {
     popupImage.setAttribute('src', event.target.src);
     popupImage.setAttribute('alt', event.target.alt);
     popupImageName.textContent = event.target.closest('.element').querySelector('.element__name').textContent;
-    popupCard.classList.add('popup_image');
     popupCard.classList.add('popup_opened');
     popupContainer = popupCard.querySelector('.popup__container_image');
     popupContainer.querySelector('.popup__close-button').addEventListener('click', () => {

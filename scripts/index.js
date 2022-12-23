@@ -1,4 +1,3 @@
-//import { initialCards } from 'index.js';
 const profileName = document.querySelector('.profile__name');
 const profileDesc = document.querySelector('.profile__description');
 const editButton = document.querySelector('.profile__edit-button');

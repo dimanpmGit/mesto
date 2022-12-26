@@ -9,11 +9,6 @@
   .profile__info {
     margin-left: 0;
     text-align: center;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .profile__info {
-    max-width: 226px;
+    width: 100%;
   }
 }

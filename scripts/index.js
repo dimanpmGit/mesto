@@ -24,7 +24,6 @@ const createCard = (cardItem) => {
   const heartButton = card.querySelector('.element__heart-button');
   const trashButton = card.querySelector('.element__trash-button');
   const image = card.querySelector('.element__image');
-
   name.textContent = cardItem.name;
   image.setAttribute('src', cardItem.link);
   image.setAttribute('alt', cardItem.name);
@@ -51,8 +50,8 @@ const renderCard = (cardItem) => {
   cardsContainer.prepend(createCard(cardItem));
 }
 
-cardsContainer.append(...initialCards.reverse().map((item) => {
-  return renderCard(item);
+cardsContainer.append(...initialCards.map((item) => {
+  return createCard(item);
 }));
 
 //  Открытие попапов

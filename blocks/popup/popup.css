@@ -14,6 +14,7 @@
   opacity: 0;
   transition: visibility .5s linear, opacity .5s linear;
   box-sizing: border-box;
+  background: rgba(0, 0, 0, .5);
 }
 
 @media screen and (max-width: 520px) {

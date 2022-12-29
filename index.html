@@ -53,16 +53,18 @@
       <div class="popup__container">
         <button class="popup__close-button link" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup-form-add">
-          <input class="popup__input popup__input_type_top" name="popup-name" type="text" placeholder="Название">
-          <input class="popup__input popup__input_type_bottom" name="popup-description" type="text"
-            placeholder="Ссылка на страницу">
+        <form class="popup__form" name="popup-form-add" novalidate>
+          <input id="place-name" class="popup__input popup__input_type_top" name="popup-name" type="text" placeholder="Название" required minlength="2" maxlength="30">
+          <span class="popup__input-error place-name-error">Вы пропустили это поле.</span>
+          <input id="url" class="popup__input popup__input_type_bottom" name="popup-description" type="url"
+            placeholder="Ссылка на страницу" reqired>
+          <span class="popup__input-error url-error">Введите адрес сайта.</span>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
     <div class="popup popup_card popup_bg-color_image">
-      <div class="popup__container-image">
+      <div class="popup__container popup__container-image">
         <button class="popup__close-button link" type="button"></button>
         <img class="popup__image">
         <p class="popup__image-name"></p>
@@ -81,5 +83,6 @@
   </template>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

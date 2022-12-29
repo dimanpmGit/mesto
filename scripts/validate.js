@@ -32,34 +32,14 @@ const checkForm = (formElement) => {
   });
 }
 
-const isFormValid = (form) => {
-  const inputList = Array.from(form.querySelectorAll('.popup__input'));
-  const buttonElement = form.querySelector('.popup__save-button');
-  if (inputList.every((input) => input.length > 1) || inputList.every((input) => input.validity.valid)) {
-    //console.log('нет');
-  }
-  else {
-    //console.log('да');
-  }
-}
-
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  //console.log("1: " + inputList[0].value);
   const buttonElement = formElement.querySelector('.popup__save-button');
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      //console.log("0: " + inputList[0].value.length);
-      //console.log("1: " + inputList[1].value.length);
-      //if (inputList.every((input) => { return (input.value.length > 0) })) {
-      //console.log(inputList.every((input) => input.value.length > 1));
-      //console.log(inputList.every((input) => input.validity.valid));
-      //if (!inputList.every((input) => input.value.length > 1) || !inputList.every((input) => input.validity.valid)) {
-        toggleButtonState(inputList, buttonElement);
-      //};
+      toggleButtonState(inputList, buttonElement);
       checkInputValidity(formElement, inputElement);
-      isFormValid(formElement);
     });
     inputElement.addEventListener('keydown', function (evt) {
       //  При нажатии Enter проверяем валидность полей
@@ -100,13 +80,13 @@ const enableValidation = () => {
 enableValidation();
 
 function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
+  return inputList.every((inputElement) => {
+    return (inputElement.value.length > 1) && (inputElement.validity.valid);//!inputElement.validity.valid;
   });
 }
 
 function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
+  if (!hasInvalidInput(inputList)) {
     buttonElement.classList.add('popup__save-button_type_inactive');
   }
   else {

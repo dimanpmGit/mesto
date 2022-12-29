@@ -43,6 +43,18 @@ const setEventListeners = (formElement) => {
       };
       checkInputValidity(formElement, inputElement);
     });
+    inputElement.addEventListener('keydown', function (evt) {
+      //  При нажатии Enter проверяем валидность полей
+      if (evt.keyCode === 13) {
+        if (inputList.every((input) => { return (input.value.length > 1) && inputElement.validity.valid })) {
+          toggleButtonState(inputList, buttonElement);
+        }
+        else {
+          evt.preventDefault();   
+        }
+        checkInputValidity(formElement, inputElement);
+      }
+    });
   });
 };
 

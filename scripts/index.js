@@ -142,4 +142,3 @@ popupArr.forEach((popup) => {
     })
   });
 });
-

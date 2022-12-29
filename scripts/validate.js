@@ -56,15 +56,6 @@ const setEventListeners = (formElement) => {
   });
 };
 
-const allClasses = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-};
-
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
@@ -81,7 +72,7 @@ enableValidation();
 
 function hasInvalidInput(inputList) {
   return inputList.every((inputElement) => {
-    return (inputElement.value.length > 1) && (inputElement.validity.valid);//!inputElement.validity.valid;
+    return (inputElement.value.length > 1) && (inputElement.validity.valid);
   });
 }
 

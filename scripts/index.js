@@ -1,3 +1,4 @@
+const page = document.querySelector('.page');
 const popups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_edit');
 const cardPopup = document.querySelector('.popup_add');
@@ -132,4 +133,13 @@ popupArr.forEach((popup) => {
   popup.querySelector('.popup__container').addEventListener('click', (evt) => {
     evt.stopPropagation();
   });
+  page.addEventListener('keydown', (evt) => {
+    const popupsArr = Array.from(popups);
+    popupsArr.forEach((popup) => {
+      if (evt.keyCode === 27) {
+        closePopup(popup);
+      }
+    })
+  });
 });
+

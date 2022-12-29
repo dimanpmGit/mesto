@@ -6,10 +6,6 @@ const imagePopup = document.querySelector('.popup_card');
 const profilePopupContainer = profilePopup.querySelector('.popup__container');
 const profileForm = profilePopup.querySelector('.popup__form');
 const cardForm = cardPopup.querySelector('.popup__form');
-/*const profileSaveButton = profileForm.querySelector('.popup__save-button');
-const profileInputs = profilePopup.querySelectorAll('.popup__input');
-const cardSaveButton = cardForm.querySelector('.popup__save-button');
-const cardInputs = cardPopup.querySelectorAll('.popup__input');*/
 const cardPopupContainer = cardPopup.querySelector('.popup__container');
 const imagePopupContainer = imagePopup.querySelector('.popup__container-image');
 const profileName = document.querySelector('.profile__name');
@@ -142,4 +138,3 @@ popupArr.forEach((popup) => {
     })
   });
 });
-

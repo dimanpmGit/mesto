@@ -30,27 +30,12 @@ const setEventListeners = (formElement, validationConfig) => {
       toggleButtonState(inputList, buttonElement, validationConfig);
       checkInputValidity(formElement, inputElement, validationConfig);
     });
-    /*inputElement.addEventListener('keydown', function (evt) {
-      //  При нажатии Enter проверяем валидность полей
-      if ((evt.code === 'Enter') || (evt.code === 'NumpadEnter')) {
-        if (inputList.every((input) => { return (input.value.length > 1) && inputElement.validity.valid })) {
-          toggleButtonState(inputList, buttonElement, validationConfig);
-        }
-        else {
-          evt.preventDefault();   
-        }
-        checkInputValidity(formElement, inputElement, validationConfig);
-      }
-    });*/
   });
 };
 
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(`${validationConfig.formSelector}`));
   formList.forEach((formElement) => {
-    /*formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });*/
     formList.forEach((formElement) => {
       setEventListeners(formElement, validationConfig);
     });
@@ -59,7 +44,7 @@ const enableValidation = (validationConfig) => {
 
 function hasInvalidInput(inputList) {
   return inputList.every((inputElement) => {
-    return (inputElement.value.length > 1) && (inputElement.validity.valid);
+    return inputElement.validity.valid;
   });
 }
 
@@ -74,7 +59,7 @@ function toggleButtonState(inputList, buttonElement, validationConfig) {
 
 function disableSubmitButton(buttonElement, validationConfig) {
   buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
-  buttonElement.setAttribute('disabled', 'true');
+  buttonElement.setAttribute('disabled', true);
 }
 
 function enableSubmitButton(buttonElement, validationConfig) {

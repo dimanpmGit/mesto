@@ -62,18 +62,9 @@ const renderCard = (cardItem) => {
 cardsContainer.append(...initialCards.map(createCard));
 
 function closePopupByEsc() {
+  const openedPopup = document.querySelector('.popup_opened');
   if (event.code === 'Escape') {
-    if (event.target.attributes['aria-label']) {
-      if (event.target.attributes['aria-label'].value === 'Edit') {
-        closePopup(profilePopup);
-      }
-      else if (event.target.attributes['aria-label'].value === 'Add') {
-        closePopup(cardPopup);
-      }
-    }
-    else {
-      closePopup(imagePopup);
-    }
+    closePopup(openedPopup);
   };
 }
 

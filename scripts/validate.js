@@ -21,17 +21,6 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const checkForm = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
-  if (!inputList.every((input) => input.length > 0)) {
-    toggleButtonState(inputList, buttonElement);
-  };
-  inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement);
-  });
-}
-
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonElement = formElement.querySelector('.popup__save-button');
@@ -67,8 +56,6 @@ const enableValidation = () => {
     });
   });
 };
-
-enableValidation();
 
 function hasInvalidInput(inputList) {
   return inputList.every((inputElement) => {

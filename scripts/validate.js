@@ -1,58 +1,58 @@
 //  Валидация форм
-const showInputError = (formElement, inputElement, errorMessage, classListObj) => {
+const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(`${classListObj.inputErrorClass}`);
+  inputElement.classList.add(`${validationConfig.inputErrorClass}`);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(`${classListObj.errorClass}`);
+  errorElement.classList.add(`${validationConfig.errorClass}`);
 };
 
-const hideInputError = (formElement, inputElement, classListObj) => {
+const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(`${classListObj.inputErrorClass}`);
-  errorElement.classList.remove(`${classListObj.errorClass}`);
+  inputElement.classList.remove(`${validationConfig.inputErrorClass}`);
+  errorElement.classList.remove(`${validationConfig.errorClass}`);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement, classListObj) => {
+const checkInputValidity = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, classListObj);
+    showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
   } else {
-    hideInputError(formElement, inputElement, classListObj);
+    hideInputError(formElement, inputElement, validationConfig);
   }
 };
 
-const setEventListeners = (formElement, classListObj) => {
-  const inputList = Array.from(formElement.querySelectorAll(`${classListObj.inputSelector}`));
-  const buttonElement = formElement.querySelector(`${classListObj.submitButtonSelector}`);
-  toggleButtonState(inputList, buttonElement, classListObj);
+const setEventListeners = (formElement, validationConfig) => {
+  const inputList = Array.from(formElement.querySelectorAll(`${validationConfig.inputSelector}`));
+  const buttonElement = formElement.querySelector(`${validationConfig.submitButtonSelector}`);
+  toggleButtonState(inputList, buttonElement, validationConfig);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      toggleButtonState(inputList, buttonElement, classListObj);
-      checkInputValidity(formElement, inputElement, classListObj);
+      toggleButtonState(inputList, buttonElement, validationConfig);
+      checkInputValidity(formElement, inputElement, validationConfig);
     });
-    inputElement.addEventListener('keydown', function (evt) {
+    /*inputElement.addEventListener('keydown', function (evt) {
       //  При нажатии Enter проверяем валидность полей
-      if (evt.keyCode === 13) {
+      if ((evt.code === 'Enter') || (evt.code === 'NumpadEnter')) {
         if (inputList.every((input) => { return (input.value.length > 1) && inputElement.validity.valid })) {
-          toggleButtonState(inputList, buttonElement, classListObj);
+          toggleButtonState(inputList, buttonElement, validationConfig);
         }
         else {
           evt.preventDefault();   
         }
-        checkInputValidity(formElement, inputElement, classListObj);
+        checkInputValidity(formElement, inputElement, validationConfig);
       }
-    });
+    });*/
   });
 };
 
-const enableValidation = (classListObj) => {
-  const formList = Array.from(document.querySelectorAll(`${classListObj.formSelector}`));
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(`${validationConfig.formSelector}`));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
+    /*formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
-    });
+    });*/
     formList.forEach((formElement) => {
-      setEventListeners(formElement, classListObj);
+      setEventListeners(formElement, validationConfig);
     });
   });
 };
@@ -63,11 +63,21 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, buttonElement, classListObj) {
+function toggleButtonState(inputList, buttonElement, validationConfig) {
   if (!hasInvalidInput(inputList)) {
-    buttonElement.classList.add(`${classListObj.inactiveButtonClass}`);
+    disableSubmitButton(buttonElement, validationConfig);
   }
   else {
-    buttonElement.classList.remove(`${classListObj.inactiveButtonClass}`);
+    enableSubmitButton(buttonElement, validationConfig);
   }
+}
+
+function disableSubmitButton(buttonElement, validationConfig) {
+  buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
+  buttonElement.setAttribute('disabled', 'true');
+}
+
+function enableSubmitButton(buttonElement, validationConfig) {
+  buttonElement.classList.remove(`${validationConfig.inactiveButtonClass}`);
+  buttonElement.removeAttribute('disabled');
 }

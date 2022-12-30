@@ -21,7 +21,7 @@ const popupImageName = imagePopup.querySelector('.popup__image-name');
 const cardsContainer = document.querySelector('.elements__list');
 const template = document.querySelector('#card-item-template');
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
-const classListObj = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
@@ -29,6 +29,8 @@ const classListObj = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+const cardSubmitButton = cardForm.querySelector(`${validationConfig.submitButtonSelector}`);
+const profileSubmitButton = profileForm.querySelector(`${validationConfig.submitButtonSelector}`);
 
 //  Создать одну карточку
 const createCard = (cardItem) => {
@@ -57,34 +59,42 @@ const renderCard = (cardItem) => {
   cardsContainer.prepend(createCard(cardItem));
 }
 
-cardsContainer.append(...initialCards.map((item) => {
-  return createCard(item);
-}));
+cardsContainer.append(...initialCards.map(createCard));
 
 function closePopupByEsc() {
-  if (event.keyCode === 27) {
-    popups.forEach((popup) => {
-      closePopup(popup);
-    });
+  if (event.code === 'Escape') {
+    if (event.target.attributes['aria-label']) {
+      if (event.target.attributes['aria-label'].value === 'Edit') {
+        closePopup(profilePopup);
+      }
+      else if (event.target.attributes['aria-label'].value === 'Add') {
+        closePopup(cardPopup);
+      }
+    }
+    else {
+      closePopup(imagePopup);
+    }
   };
+}
+
+function closePopupByOutsideClick(popup) {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup')) {
+      closePopup(evt.currentTarget);
+    }
+  });
 }
 
 //  Открытие попапов
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   //  Слушатель события клика вне формы и закрытие попапа
-  popup.addEventListener('click', (evt) => {
-    if (!evt.defaultPrevented) {
-      closePopup(popup);
-    }
-  });
-  popup.querySelector('.popup__container').addEventListener('click', (evt) => {
-    evt.stopPropagation();
-  });
-  
+  closePopupByOutsideClick(popup);
   //  При нажатии Esc закрыть попап
   page.addEventListener('keydown', closePopupByEsc);
 }
+
+enableValidation(validationConfig);
 
 //  Открытие формы изменения профиля
 function openProfilePopup() {
@@ -92,14 +102,13 @@ function openProfilePopup() {
   inputBottomEdit.value = profileDesc.textContent;
   //  Изменение профиля
   openPopup(profilePopup);
-  enableValidation(classListObj);
+  enableSubmitButton(cardSubmitButton, validationConfig);
 }
 
 function openCardPopup() {
-  inputTopAdd.value = '';
-  inputBottomAdd.value = '';
+  cardForm.reset();
   openPopup(cardPopup);
-  enableValidation(classListObj);
+  disableSubmitButton(cardSubmitButton, validationConfig);
 }
 
 function openImagePopup(link, name) {

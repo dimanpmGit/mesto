@@ -45,7 +45,7 @@ const createCard = (cardItem) => {
   //  Лайк карточки
   heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
 
-  //  Удаление карточки
+  //  Удаление карточкиclosest
   trashButton.addEventListener('click', () => card.remove());
 
   //  Просмотр фотографии карточки
@@ -61,6 +61,14 @@ cardsContainer.append(...initialCards.map((item) => {
   return createCard(item);
 }));
 
+function closePopupByEsc() {
+  if (event.keyCode === 27) {
+    popups.forEach((popup) => {
+      closePopup(popup);
+    });
+  };
+}
+
 //  Открытие попапов
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -73,12 +81,9 @@ const openPopup = (popup) => {
   popup.querySelector('.popup__container').addEventListener('click', (evt) => {
     evt.stopPropagation();
   });
+  
   //  При нажатии Esc закрыть попап
-  page.addEventListener('keydown', (evt) => {
-    if (evt.keyCode === 27) {
-      closePopup(popup);
-    };
-  });
+  page.addEventListener('keydown', closePopupByEsc);
 }
 
 //  Открытие формы изменения профиля
@@ -116,7 +121,8 @@ function addCard () {
 //  Закрытие попапов
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('keydown', (evt) => {console.log('removed');});
+  //  Удаление слушателя нажатия Esc для закрытия попап
+  page.removeEventListener('keydown', closePopupByEsc);
 }
 
 //  Обработка событий страницы

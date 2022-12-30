@@ -1,58 +1,58 @@
 //  Валидация форм
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, classListObj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(`${classListObj.inputErrorClass}`);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_visible');
+  errorElement.classList.add(`${classListObj.errorClass}`);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, classListObj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_visible');
+  inputElement.classList.remove(`${classListObj.inputErrorClass}`);
+  errorElement.classList.remove(`${classListObj.errorClass}`);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, classListObj) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, classListObj);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, classListObj);
   }
 };
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__save-button');
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, classListObj) => {
+  const inputList = Array.from(formElement.querySelectorAll(`${classListObj.inputSelector}`));
+  const buttonElement = formElement.querySelector(`${classListObj.submitButtonSelector}`);
+  toggleButtonState(inputList, buttonElement, classListObj);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      toggleButtonState(inputList, buttonElement);
-      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement, classListObj);
+      checkInputValidity(formElement, inputElement, classListObj);
     });
     inputElement.addEventListener('keydown', function (evt) {
       //  При нажатии Enter проверяем валидность полей
       if (evt.keyCode === 13) {
         if (inputList.every((input) => { return (input.value.length > 1) && inputElement.validity.valid })) {
-          toggleButtonState(inputList, buttonElement);
+          toggleButtonState(inputList, buttonElement, classListObj);
         }
         else {
           evt.preventDefault();   
         }
-        checkInputValidity(formElement, inputElement);
+        checkInputValidity(formElement, inputElement, classListObj);
       }
     });
   });
 };
 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+const enableValidation = (classListObj) => {
+  const formList = Array.from(document.querySelectorAll(`${classListObj.formSelector}`));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
     formList.forEach((formElement) => {
-      setEventListeners(formElement);
+      setEventListeners(formElement, classListObj);
     });
   });
 };
@@ -63,11 +63,11 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, classListObj) {
   if (!hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__save-button_type_inactive');
+    buttonElement.classList.add(`${classListObj.inactiveButtonClass}`);
   }
   else {
-    buttonElement.classList.remove('popup__save-button_type_inactive');
+    buttonElement.classList.remove(`${classListObj.inactiveButtonClass}`);
   }
 }

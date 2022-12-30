@@ -21,6 +21,14 @@ const popupImageName = imagePopup.querySelector('.popup__image-name');
 const cardsContainer = document.querySelector('.elements__list');
 const template = document.querySelector('#card-item-template');
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
+const classListObj = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 //  Создать одну карточку
 const createCard = (cardItem) => {
@@ -79,14 +87,14 @@ function openProfilePopup() {
   inputBottomEdit.value = profileDesc.textContent;
   //  Изменение профиля
   openPopup(profilePopup);
-  enableValidation();
+  enableValidation(classListObj);
 }
 
 function openCardPopup() {
   inputTopAdd.value = '';
   inputBottomAdd.value = '';
   openPopup(cardPopup);
-  enableValidation();
+  enableValidation(classListObj);
 }
 
 function openImagePopup(link, name) {

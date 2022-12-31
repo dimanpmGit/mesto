@@ -89,14 +89,14 @@ const openPopup = (popup) => {
 function openProfilePopup() {
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
-  formErrorsReset(profileForm);
+  resetFormErrors(profileForm);
   openPopup(profilePopup);
   enableSubmitButton(profileSubmitButton, validationConfig);
 }
 
 function openCardPopup() {
   cardForm.reset();
-  formErrorsReset(cardForm);
+  resetFormErrors(cardForm);
   openPopup(cardPopup);
   disableSubmitButton(cardSubmitButton, validationConfig);
 }

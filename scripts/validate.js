@@ -69,7 +69,7 @@ function enableSubmitButton(buttonElement, validationConfig) {
 
 //  Сброс сообщенний об ошибках при повторном открытии после закрытия
 //  формы с ошибками валидации
-function formErrorsReset(formElement) {
+function resetFormErrors(formElement) {
   formElement.querySelectorAll('.popup__input').forEach((inputElement) => {
     hideInputError(formElement, inputElement, validationConfig);
   });

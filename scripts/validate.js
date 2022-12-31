@@ -43,13 +43,13 @@ const enableValidation = (validationConfig) => {
 };
 
 function hasInvalidInput(inputList) {
-  return inputList.every((inputElement) => {
-    return inputElement.validity.valid;
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
   });
 }
 
 function toggleButtonState(inputList, buttonElement, validationConfig) {
-  if (!hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList)) {
     disableSubmitButton(buttonElement, validationConfig);
   }
   else {

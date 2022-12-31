@@ -89,11 +89,11 @@ enableValidation(validationConfig);
 
 //  Открытие формы изменения профиля
 function openProfilePopup() {
+  profileForm.reset();
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
-  //  Изменение профиля
   openPopup(profilePopup);
-  enableSubmitButton(cardSubmitButton, validationConfig);
+  enableSubmitButton(profileSubmitButton, validationConfig);
 }
 
 function openCardPopup() {

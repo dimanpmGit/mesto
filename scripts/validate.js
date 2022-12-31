@@ -66,3 +66,11 @@ function enableSubmitButton(buttonElement, validationConfig) {
   buttonElement.classList.remove(`${validationConfig.inactiveButtonClass}`);
   buttonElement.removeAttribute('disabled');
 }
+
+//  Сброс сообщенний об ошибках при повторном открытии после закрытия
+//  формы с ошибками валидации
+function formErrorsReset(formElement) {
+  formElement.querySelectorAll('.popup__input').forEach((inputElement) => {
+    hideInputError(formElement, inputElement, validationConfig);
+  });
+}

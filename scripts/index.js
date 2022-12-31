@@ -85,19 +85,18 @@ const openPopup = (popup) => {
   page.addEventListener('keydown', closePopupByEsc);
 }
 
-enableValidation(validationConfig);
-
 //  Открытие формы изменения профиля
 function openProfilePopup() {
-  profileForm.reset();
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
+  formErrorsReset(profileForm);
   openPopup(profilePopup);
   enableSubmitButton(profileSubmitButton, validationConfig);
 }
 
 function openCardPopup() {
   cardForm.reset();
+  formErrorsReset(cardForm);
   openPopup(cardPopup);
   disableSubmitButton(cardSubmitButton, validationConfig);
 }
@@ -124,6 +123,8 @@ const closePopup = (popup) => {
   //  Удаление слушателя нажатия Esc для закрытия попап
   page.removeEventListener('keydown', closePopupByEsc);
 }
+
+enableValidation(validationConfig);
 
 //  Обработка событий страницы
 cardPopupContainer.querySelector('.popup__form').addEventListener('submit', (event) => {

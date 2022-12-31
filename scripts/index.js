@@ -71,8 +71,8 @@ cardsContainer.append(...initialCards.map(createCard));
 
 //  Закрытие формы/картинки нажатием клавиши [Esc]
 function closePopupByEsc() {
-  const openedPopup = document.querySelector('.popup_opened');
   if (event.code === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   };
 }

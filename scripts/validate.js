@@ -1,4 +1,8 @@
-//  Валидация форм
+//////////////////////
+//  Валидация форм  //
+//////////////////////
+
+//  Отображение ошибок валидации поля ввода (input)
 const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(`${validationConfig.inputErrorClass}`);
@@ -6,6 +10,7 @@ const showInputError = (formElement, inputElement, errorMessage, validationConfi
   errorElement.classList.add(`${validationConfig.errorClass}`);
 };
 
+//  Скрытие ошибок валидации поля ввода (input)
 const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(`${validationConfig.inputErrorClass}`);
@@ -13,6 +18,7 @@ const hideInputError = (formElement, inputElement, validationConfig) => {
   errorElement.textContent = '';
 };
 
+//  Валидация поля ввода
 const checkInputValidity = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, validationConfig);
@@ -21,6 +27,7 @@ const checkInputValidity = (formElement, inputElement, validationConfig) => {
   }
 };
 
+//  Установка слушателя события ввода символа в input
 const setEventListeners = (formElement, validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll(`${validationConfig.inputSelector}`));
   const buttonElement = formElement.querySelector(`${validationConfig.submitButtonSelector}`);
@@ -33,6 +40,7 @@ const setEventListeners = (formElement, validationConfig) => {
   });
 };
 
+//  Запуск валидации всех форм на странице
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(`${validationConfig.formSelector}`));
   formList.forEach((formElement) => {
@@ -42,12 +50,14 @@ const enableValidation = (validationConfig) => {
   });
 };
 
+//  Есть ли хоть одно невалидное поле в форме
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 
+//  Переключение кнопки формы в статусы активная/неактивная
 function toggleButtonState(inputList, buttonElement, validationConfig) {
   if (hasInvalidInput(inputList)) {
     disableSubmitButton(buttonElement, validationConfig);
@@ -57,11 +67,13 @@ function toggleButtonState(inputList, buttonElement, validationConfig) {
   }
 }
 
+//  Переключение кнопки формы в статус неактивная
 function disableSubmitButton(buttonElement, validationConfig) {
   buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
   buttonElement.setAttribute('disabled', true);
 }
 
+//  Переключение кнопки формы в статус активная
 function enableSubmitButton(buttonElement, validationConfig) {
   buttonElement.classList.remove(`${validationConfig.inactiveButtonClass}`);
   buttonElement.removeAttribute('disabled');

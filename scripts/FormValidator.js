@@ -1,3 +1,5 @@
+import { enableSubmitButton, disableSubmitButton } from "../utils/utils.js";
+
 class FormValidator {
   
   constructor(validationConfig, formElement){
@@ -28,18 +30,6 @@ class FormValidator {
     });
   }
 
-  //  Переключение кнопки формы в статус неактивная
-  _disableSubmitButton(buttonElement) {
-    buttonElement.classList.add(`${this._validationConfig.inactiveButtonClass}`);
-    buttonElement.setAttribute('disabled', true);
-  }
-
-  //  Переключение кнопки формы в статус активная
-  _enableSubmitButton(buttonElement) {
-    buttonElement.classList.remove(`${this._validationConfig.inactiveButtonClass}`);
-    buttonElement.removeAttribute('disabled');
-  }
-
   //  Валидация поля ввода
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
@@ -52,10 +42,10 @@ class FormValidator {
   //  Переключение кнопки формы в статусы активная/неактивная
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      this._disableSubmitButton(buttonElement);
+      disableSubmitButton(buttonElement);
     }
     else {
-      this._enableSubmitButton(buttonElement);
+      enableSubmitButton(buttonElement);
     }
   }
 

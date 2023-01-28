@@ -1,5 +1,5 @@
-import { 
-  page, profilePopup, cardPopup, imagePopup, cardForm, profileName, profileDesc, inputTopEdit, inputBottomEdit, popupImage, popupImageName
+import {
+  page, profilePopup, cardPopup, imagePopup, cardForm, profileName, profileDesc, inputTopEdit, inputBottomEdit, popupImage, popupImageName, validationConfig
  } 
  from "../scripts/constants.js";
 
@@ -36,12 +36,14 @@ const openPopup = (popup) => {
 function openProfilePopup() {
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
+  enableSubmitButton(profilePopup.querySelector(`${validationConfig.submitButtonSelector}`));
   openPopup(profilePopup);
 }
 
 //  Открытие формы добавления карточки
 function openCardPopup() {
   cardForm.reset();
+  disableSubmitButton(cardPopup.querySelector(`${validationConfig.submitButtonSelector}`));
   openPopup(cardPopup);
 }
 
@@ -60,4 +62,16 @@ const closePopup = (popup) => {
   page.removeEventListener('keydown', closePopupByEsc);
 }
 
-export { openProfilePopup, openCardPopup, closePopup, openImagePopup };
+  //  Переключение кнопки формы в статус неактивная
+  function disableSubmitButton(buttonElement) {
+    buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
+    buttonElement.setAttribute('disabled', true);
+  }
+
+  //  Переключение кнопки формы в статус активная
+  function enableSubmitButton(buttonElement) {
+    buttonElement.classList.remove(`${validationConfig.inactiveButtonClass}`);
+    buttonElement.removeAttribute('disabled');
+  }
+
+export { openProfilePopup, openCardPopup, closePopup, openImagePopup, disableSubmitButton, enableSubmitButton };

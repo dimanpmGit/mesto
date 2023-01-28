@@ -7,9 +7,6 @@ import {
 }
 from "./constants.js";
 
-//const cardSubmitButton = cardForm.querySelector(`${validationConfig.submitButtonSelector}`);
-//const profileSubmitButton = profileForm.querySelector(`${validationConfig.submitButtonSelector}`);
-
 //////////////////////////
 //  Функционал страницы //
 //////////////////////////

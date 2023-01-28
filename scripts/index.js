@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const page = document.querySelector('.page');
 const popups = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_edit');
@@ -36,38 +38,47 @@ const profileSubmitButton = profileForm.querySelector(`${validationConfig.submit
 //  Функционал страницы //
 //////////////////////////
 
-//  Создание одной карточки
-const createCard = (cardItem) => {
-  const card = template.content.querySelector('.element').cloneNode(true);
-  const name = card.querySelector('.element__name');
-  const heartButton = card.querySelector('.element__heart-button');
-  const trashButton = card.querySelector('.element__trash-button');
-  const image = card.querySelector('.element__image');
-  name.textContent = cardItem.name;
-  image.setAttribute('src', cardItem.link);
-  image.setAttribute('alt', cardItem.name);
+// //  Создание одной карточки
+// const createCard = (cardItem) => {
+//   const card = template.content.querySelector('.element').cloneNode(true);
 
-  //////////////////////////////////
-  //  Обработка событий карточки  //
-  //////////////////////////////////
-  //  Лайк карточки
-  heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
+//   const name = card.querySelector('.element__name');
+//   name.textContent = cardItem.name;
 
-  //  Удаление карточкиclosest
-  trashButton.addEventListener('click', () => card.remove());
+//   const heartButton = card.querySelector('.element__heart-button');
+//   const trashButton = card.querySelector('.element__trash-button');
 
-  //  Просмотр фотографии карточки
-  image.addEventListener('click', () => openImagePopup(cardItem.link, cardItem.name));
-  return card;
-}
+//   const image = card.querySelector('.element__image');
+
+
+//   image.setAttribute('src', cardItem.link);
+//   image.setAttribute('alt', cardItem.name);
+
+//   //////////////////////////////////
+//   //  Обработка событий карточки  //
+//   //////////////////////////////////
+//   //  Лайк карточки
+//   heartButton.addEventListener('click', () => heartButton.classList.toggle('element__heart-button_active'));
+
+//   //  Удаление карточкиclosest
+//   trashButton.addEventListener('click', () => card.remove());
+
+//   //  Просмотр фотографии карточки
+//   image.addEventListener('click', () => openImagePopup(cardItem.link, cardItem.name));
+//   return card;
+// }
 
 //  Добавление карточки на страницу
 const renderCard = (cardItem) => {
-  cardsContainer.prepend(createCard(cardItem));
+  const card = new Card(cardItem);
+  cardsContainer.prepend(card.getView());
+  //cardsContainer.prepend(createCard(cardItem));
 }
 
 //  Добавление карточек при загрузке страницы
-cardsContainer.append(...initialCards.map(createCard));
+cardsContainer.append(...initialCards.map((cardItem) => {
+  renderCard(cardItem);
+}));
 
 //  Закрытие формы/картинки нажатием клавиши [Esc]
 function closePopupByEsc() {
@@ -169,3 +180,5 @@ editButton.addEventListener('click', openProfilePopup);
 
 //  Открытие попапа по нажатию на кнопке добавления карточки [+]
 addButton.addEventListener('click', openCardPopup);
+
+export { openImagePopup }

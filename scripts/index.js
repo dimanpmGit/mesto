@@ -68,7 +68,6 @@ const profileSubmitButton = profileForm.querySelector(`${validationConfig.submit
 const renderCard = (cardItem) => {
   const card = new Card(cardItem);
   cardsContainer.prepend(card.getView());
-  //cardsContainer.prepend(createCard(cardItem));
 }
 
 //  Добавление карточек при загрузке страницы

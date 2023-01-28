@@ -1,4 +1,6 @@
+import initialCards from './cards.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const page = document.querySelector('.page');
 const popups = document.querySelectorAll('.popup');
@@ -110,17 +112,22 @@ const openPopup = (popup) => {
 function openProfilePopup() {
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
-  resetFormErrors(profileForm);
+  //resetFormErrors(profileForm);
+  //openPopup(profilePopup);
+  //enableSubmitButton(profileSubmitButton, validationConfig);
+  const profileFormValidator = new FormValidator(validationConfig, profilePopup);
+  profileFormValidator.enableValidation();
   openPopup(profilePopup);
-  enableSubmitButton(profileSubmitButton, validationConfig);
 }
 
 //  Открытие формы добавления карточки
 function openCardPopup() {
   cardForm.reset();
-  resetFormErrors(cardForm);
+  //resetFormErrors(cardForm);
+  const cardFormValidator = new FormValidator(validationConfig, cardPopup);
+  cardFormValidator.enableValidation();
   openPopup(cardPopup);
-  disableSubmitButton(cardSubmitButton, validationConfig);
+  //disableSubmitButton(cardSubmitButton, validationConfig);
 }
 
 //  Открытие картинки карточки на весь экран
@@ -148,7 +155,7 @@ const closePopup = (popup) => {
 }
 
 //  Старт валидации форм
-enableValidation(validationConfig);
+//enableValidation(validationConfig);
 
 //////////////////////////////////
 //  Обработка событий страницы  //

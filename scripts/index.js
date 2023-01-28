@@ -1,8 +1,9 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { openProfilePopup, openCardPopup, addCard, closePopup } from '../utils/utils.js';
+import { openProfilePopup, openCardPopup, closePopup } from '../utils/utils.js';
 import {
-  initialCards, profilePopup, cardPopup, profilePopupContainer, cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig
+  initialCards, profilePopup, cardPopup, profilePopupContainer, cardPopupContainer, profileName, profileDesc, 
+  editButton, addButton, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig, inputTopAdd, inputBottomAdd
 }
 from "./constants.js";
 
@@ -29,6 +30,15 @@ profileFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopup);
 cardFormValidator.enableValidation();
+
+//  Добавление карточки
+function addCard() {
+  const cardItem = {
+    name: inputTopAdd.value,
+    link: inputBottomAdd.value
+  };
+  renderCard(cardItem);
+}
 
 //////////////////////////////////
 //  Обработка событий страницы  //

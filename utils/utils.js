@@ -1,5 +1,5 @@
 import { 
-  page, profilePopup, cardPopup, imagePopup, cardForm, profileName, profileDesc, inputTopAdd, inputBottomAdd, inputTopEdit, inputBottomEdit, popupImage, popupImageName
+  page, profilePopup, cardPopup, imagePopup, cardForm, profileName, profileDesc, inputTopEdit, inputBottomEdit, popupImage, popupImageName
  } 
  from "../scripts/constants.js";
 
@@ -53,15 +53,6 @@ function openImagePopup(link, name) {
   openPopup(imagePopup);
 }
 
-//  Добавление карточки
-function addCard() {
-  const cardItem = {
-    name: inputTopAdd.value,
-    link: inputBottomAdd.value
-  };
-  renderCard(cardItem);
-}
-
 //  Закрытие попапов
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
@@ -69,4 +60,4 @@ const closePopup = (popup) => {
   page.removeEventListener('keydown', closePopupByEsc);
 }
 
-export { openProfilePopup, openCardPopup, addCard, closePopup, openImagePopup };
+export { openProfilePopup, openCardPopup, closePopup, openImagePopup };

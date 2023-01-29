@@ -3,6 +3,7 @@ class FormValidator {
   constructor(validationConfig, formElement){
     this._validationConfig = validationConfig;
     this._formElement = formElement;
+    this._formButton = formElement.querySelector(`${validationConfig.submitButtonSelector}`);
   }
 
   //  Отображение ошибок валидации поля ввода (input)
@@ -38,15 +39,15 @@ class FormValidator {
   }
 
   //  Переключение кнопки формы в статус неактивная
-  disableSubmitButton(buttonElement) {
-    buttonElement.classList.add(`${this._validationConfig.inactiveButtonClass}`);
-    buttonElement.setAttribute('disabled', true);
+  disableSubmitButton() {
+    this._formButton.classList.add(`${this._validationConfig.inactiveButtonClass}`);
+    this._formButton.setAttribute('disabled', true);
   }
 
   //  Переключение кнопки формы в статус активная
-  enableSubmitButton(buttonElement) {
-    buttonElement.classList.remove(`${this._validationConfig.inactiveButtonClass}`);
-    buttonElement.removeAttribute('disabled');
+  enableSubmitButton() {
+    this._formButton.classList.remove(`${this._validationConfig.inactiveButtonClass}`);
+    this._formButton.removeAttribute('disabled');
   }
 
   //  Переключение кнопки формы в статусы активная/неактивная

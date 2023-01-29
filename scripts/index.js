@@ -40,14 +40,14 @@ function addCard() {
 function openProfilePopup() {
   inputTopEdit.value = profileName.textContent;
   inputBottomEdit.value = profileDesc.textContent;
-  profileFormValidator.enableSubmitButton(profilePopup.querySelector(`${validationConfig.submitButtonSelector}`));
+  profileFormValidator.enableSubmitButton();
   openPopup(profilePopup);
 }
 
 //  Открытие формы добавления карточки
 function openCardPopup() {
   cardForm.reset();
-  cardFormValidator.disableSubmitButton(cardPopup.querySelector(`${validationConfig.submitButtonSelector}`));
+  cardFormValidator.disableSubmitButton();
   openPopup(cardPopup);
 }
 

@@ -1,7 +1,4 @@
-import {
-  page, profilePopup, cardPopup, imagePopup, cardForm, profileName, profileDesc, inputTopEdit, inputBottomEdit, popupImage, popupImageName, validationConfig
- } 
- from "../scripts/constants.js";
+import { page } from "../scripts/constants.js";
 
 //  Закрытие формы/картинки нажатием клавиши [Esc]
 function closePopupByEsc() {
@@ -11,16 +8,21 @@ function closePopupByEsc() {
   };
 }
 
+//  Закрытие формы/картинки нажатием вне области формы/картинки
 function closePopupByOutsideClick(evt) {
   if (evt.target.classList.contains('popup')) {
-    evt.target.removeEventListener('click', setOutsideClickListener);
     closePopup(evt.currentTarget);
   }
 }
 
-//  Закрытие формы/картинки по клику вне формы/картинки
+//  Установка слушателя нажатия вне области попапа
 function setOutsideClickListener(popup) {
   popup.addEventListener('click', closePopupByOutsideClick);
+}
+
+//  Удаление слушателя нажатия вне области попапа
+function removeOutsideClickListener(popup) {
+  popup.removeEventListener('click', closePopupByOutsideClick);
 }
 
 //  Открытие попапов
@@ -32,46 +34,12 @@ const openPopup = (popup) => {
   page.addEventListener('keydown', closePopupByEsc);
 }
 
-//  Открытие формы изменения профиля
-function openProfilePopup() {
-  inputTopEdit.value = profileName.textContent;
-  inputBottomEdit.value = profileDesc.textContent;
-  enableSubmitButton(profilePopup.querySelector(`${validationConfig.submitButtonSelector}`));
-  openPopup(profilePopup);
-}
-
-//  Открытие формы добавления карточки
-function openCardPopup() {
-  cardForm.reset();
-  disableSubmitButton(cardPopup.querySelector(`${validationConfig.submitButtonSelector}`));
-  openPopup(cardPopup);
-}
-
-//  Открытие картинки карточки на весь экран
-function openImagePopup(link, name) {
-  popupImage.setAttribute('src', link);
-  popupImage.setAttribute('alt', name);
-  popupImageName.textContent = name;
-  openPopup(imagePopup);
-}
-
 //  Закрытие попапов
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   //  Удаление слушателя нажатия Esc для закрытия попап
   page.removeEventListener('keydown', closePopupByEsc);
+  removeOutsideClickListener(popup);
 }
 
-  //  Переключение кнопки формы в статус неактивная
-  function disableSubmitButton(buttonElement) {
-    buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
-    buttonElement.setAttribute('disabled', true);
-  }
-
-  //  Переключение кнопки формы в статус активная
-  function enableSubmitButton(buttonElement) {
-    buttonElement.classList.remove(`${validationConfig.inactiveButtonClass}`);
-    buttonElement.removeAttribute('disabled');
-  }
-
-export { openProfilePopup, openCardPopup, closePopup, openImagePopup, disableSubmitButton, enableSubmitButton };
+export { openPopup, closePopup };

@@ -57,5 +57,5 @@ const initialCards = [
 
 export {
   initialCards, page, profilePopup, cardPopup, imagePopup, profilePopupContainer, profileForm, cardForm, cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, inputBottomAdd, inputTopEdit, inputBottomEdit, popupImage,
-  popupImageName, cardsContainer, buttonCloseList, validationConfig 
+  popupImageName, cardsContainer, buttonCloseList, validationConfig
 };

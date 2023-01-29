@@ -1,4 +1,5 @@
-import { openImagePopup } from "../utils/utils.js";
+import { openPopup } from '../utils/utils.js';
+import { imagePopup, popupImage, popupImageName } from './constants.js';
 
 class Card {
   constructor(initialCardElement, cardTemplateSelector){
@@ -46,6 +47,14 @@ class Card {
     this._newCard.remove();
     this._newCard = null;
   }
+
+  //  Открытие картинки карточки на весь экран
+  _openImagePopup(link, name) {
+    popupImage.setAttribute('src', link);
+    popupImage.setAttribute('alt', name);
+    popupImageName.textContent = name;
+    openPopup(imagePopup);
+  }
     
   //////////////////////////////////
   //  Обработка событий карточки  //
@@ -61,7 +70,7 @@ class Card {
 
     //  Просмотр фотографии карточки
     const cardImage = this._newCard.querySelector('.element__image');
-    cardImage.addEventListener('click', () => openImagePopup(this._cardParams.link, this._cardParams.name));
+    cardImage.addEventListener('click', () => this._openImagePopup(this._cardParams.link, this._cardParams.name));
   }
 
   //  Создание одной карточки

@@ -1,9 +1,8 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { openProfilePopup, openCardPopup, closePopup } from '../utils/utils.js';
+import { openPopup, closePopup } from '../utils/utils.js';
 import {
-  initialCards, profilePopup, cardPopup, profilePopupContainer, cardPopupContainer, profileName, profileDesc, 
-  editButton, addButton, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig, inputTopAdd, inputBottomAdd
+  initialCards, profilePopup, cardPopup, profilePopupContainer, cardForm, cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, inputBottomAdd, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig
 }
 from "./constants.js";
 
@@ -35,6 +34,21 @@ function addCard() {
     link: inputBottomAdd.value
   };
   renderCard(cardItem);
+}
+
+//  Открытие формы изменения профиля
+function openProfilePopup() {
+  inputTopEdit.value = profileName.textContent;
+  inputBottomEdit.value = profileDesc.textContent;
+  profileFormValidator.enableSubmitButton(profilePopup.querySelector(`${validationConfig.submitButtonSelector}`));
+  openPopup(profilePopup);
+}
+
+//  Открытие формы добавления карточки
+function openCardPopup() {
+  cardForm.reset();
+  cardFormValidator.disableSubmitButton(cardPopup.querySelector(`${validationConfig.submitButtonSelector}`));
+  openPopup(cardPopup);
 }
 
 //////////////////////////////////

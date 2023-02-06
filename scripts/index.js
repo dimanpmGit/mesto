@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import { openPopup, closePopup } from '../utils/utils.js';
 import {
@@ -9,7 +10,7 @@ from "./constants.js";
 //////////////////////////
 //  Функционал страницы //
 //////////////////////////
-
+/*
 //  Добавление карточки на страницу
 const renderCard = (cardItem) => {
   const card = new Card(cardItem);
@@ -19,7 +20,20 @@ const renderCard = (cardItem) => {
 //  Добавление карточек при загрузке страницы
 cardsContainer.append(...initialCards.map((cardItem) => {
   renderCard(cardItem);
-}));
+}));*/
+
+//  Добавление карточек при загрузке страницы
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem);
+      cardsList.addItem(card.getView());
+    }
+  },
+  '.elements__list'
+);
+
+cardsList.renderElements();
 
 const profileFormValidator = new FormValidator(validationConfig, profilePopup);
 profileFormValidator.enableValidation();
@@ -33,7 +47,9 @@ function addCard() {
     name: inputTopAdd.value,
     link: inputBottomAdd.value
   };
-  renderCard(cardItem);
+  const card = new Card(cardItem);
+  cardsList.addItem(card.getView());
+  //renderCard(cardItem);
 }
 
 //  Открытие формы изменения профиля

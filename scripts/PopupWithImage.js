@@ -8,6 +8,7 @@ export default class PopupWithImage extends Popup {
   }
 
   open() {
+    super.open();
     popupImage.setAttribute('src', this._cardParams.link);
     popupImageName.setAttribute('alt', this._cardParams.name);
     popupImage.textContent = this._cardParams.name;

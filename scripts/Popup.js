@@ -31,7 +31,6 @@ export default class Popup {
 
     // Слушатель закрытия по нажатию кнопки Esc
     page.addEventListener('keydown', this._handleEscClose);
-    this.setEventListeners();
   }
 
   // Закрытие попапа

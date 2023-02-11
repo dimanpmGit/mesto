@@ -71,7 +71,6 @@ class Card {
 
     //  Просмотр фотографии карточки
     const cardImage = this._newCard.querySelector('.element__image');
-    //cardImage.addEventListener('click', () => this._openImagePopup(this._cardParams.link, this._cardParams.name));
     const popupWithImage = new PopupWithImage('.popup_card', this._cardParams);
     cardImage.addEventListener('click', popupWithImage.open.bind(popupWithImage));
   }

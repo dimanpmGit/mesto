@@ -48,14 +48,6 @@ class Card {
     this._newCard.remove();
     this._newCard = null;
   }
-/*
-  //  Открытие картинки карточки на весь экран
-  _openImagePopup(link, name) {
-    popupImage.setAttribute('src', link);
-    popupImage.setAttribute('alt', name);
-    popupImageName.textContent = name;
-    openPopup(imagePopup);
-  }*/
     
   //////////////////////////////////
   //  Обработка событий карточки  //

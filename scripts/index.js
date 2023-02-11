@@ -8,6 +8,7 @@ import {
 }
 from "./constants.js";
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -53,18 +54,32 @@ function openCardPopup() {
 
 //  Обработка события submit формы добавления карточки
 
+const userInfo = new UserInfo({
+  userNameSelector: '.profile__name', 
+  userInfoSelector: '.profile__description'
+  });
+
 //  Открытие попапа по нажатию на кнопке редактирования профиля
-const editProfilePopup = new PopupWithForm('.popup_edit', () => {
-  profileName.textContent = inputTopEdit.value;
-  profileDesc.textContent = inputBottomEdit.value;
-  editProfilePopup.close();
-});
+const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
+    //profileName.textContent = inputTopEdit.value;
+    //profileDesc.textContent = inputBottomEdit.value;
+    userInfo.setUserInfo({
+      name: inputValues['popup-name'],
+      description: inputValues['popup-description']
+    });
+
+    editProfilePopup.close();
+  });
 editProfilePopup.setEventListeners();
 
 editButton.addEventListener('click', () => {
-  inputTopEdit.value = profileName.textContent;
-  inputBottomEdit.value = profileDesc.textContent;
+
+  //inputTopEdit.value = profileName.textContent;
+  //inputBottomEdit.value = profileDesc.textContent;
   profileFormValidator.enableSubmitButton();
+  const userInfoData = userInfo.getUserInfo();
+  inputTopEdit.value = userInfoData['name'];
+  inputBottomEdit.value = userInfoData['description'];
 
   editProfilePopup.open();
 });

@@ -19,14 +19,23 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  _handleSubmitForm() {
+    console.log('setEventListeners()');
+    console.log(this);
+    event.preventDefault();
+    this._formSubmiter(this._getInputValues());
+    this._popupForm.reset();
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._popup.querySelector('.popup__form').addEventListener('submit', this._formSubmiter);
+    this._popupForm.addEventListener('submit', this._handleSubmitForm.bind(this));
   }
 
   // Закрытие попапа
   close() {
     super.close();
     this._popupForm.reset();
+    this._popupForm.removeEventListener('submit', this._handleSubmitForm.bind(this));
   }
 }

@@ -11,7 +11,7 @@ class Card {
   ////////////////////////////////
   // Получение шаблона карточки //
   ////////////////////////////////
-  _getTemplate(){
+  _getTemplate() {
     const card = document
       .querySelector('#card-item-template')
       .content

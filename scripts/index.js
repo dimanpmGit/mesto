@@ -3,9 +3,12 @@ import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import { openPopup, closePopup } from '../utils/utils.js';
 import {
-  initialCards, profilePopup, cardPopup, profilePopupContainer, cardForm, cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, inputBottomAdd, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig
+  initialCards, profilePopup, cardPopup, profilePopupContainer, cardForm, 
+  cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, 
+  inputBottomAdd, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig
 }
 from "./constants.js";
+import PopupWithForm from './PopupWithForm.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -51,7 +54,7 @@ function addCard() {
   cardsList.addItem(card.getView());
   //renderCard(cardItem);
 }
-
+/*
 //  Открытие формы изменения профиля
 function openProfilePopup() {
   inputTopEdit.value = profileName.textContent;
@@ -66,13 +69,14 @@ function openCardPopup() {
   cardFormValidator.disableSubmitButton();
   openPopup(cardPopup);
 }
-
+*/
 //////////////////////////////////
 //  Обработка событий страницы  //
 //////////////////////////////////
 
 //  Обработка события submit формы добавления карточки
-cardPopupContainer.querySelector('.popup__form').addEventListener('submit', (event) => {
+
+/*cardPopupContainer.querySelector('.popup__form').addEventListener('submit', (event) => {
   event.preventDefault();
   addCard();
   closePopup(cardPopup);
@@ -84,16 +88,39 @@ profilePopupContainer.querySelector('.popup__form').addEventListener('submit', (
   profileName.textContent = inputTopEdit.value;
   profileDesc.textContent = inputBottomEdit.value;
   closePopup(profilePopup);
-});
-
+});*/
+/*
 //  Закрытие попапа по нажатию на кнопке крестик
 buttonCloseList.forEach(btn => {
   const popup = btn.closest('.popup');
   btn.addEventListener('click', () => closePopup(popup));
-});
+});*/
 
 //  Открытие попапа по нажатию на кнопке редактирования профиля
-editButton.addEventListener('click', openProfilePopup);
+//editButton.addEventListener('click', openProfilePopup);
+editButton.addEventListener('click', () => {
+  inputTopEdit.value = profileName.textContent;
+  inputBottomEdit.value = profileDesc.textContent;
+  profileFormValidator.enableSubmitButton();
+  const popupWithForm = new PopupWithForm('.popup_edit', (evt) => {
+    evt.preventDefault();
+    profileName.textContent = inputTopEdit.value;
+    profileDesc.textContent = inputBottomEdit.value;
+    popupWithForm.close();
+  });
+  popupWithForm.open();
+});
 
 //  Открытие попапа по нажатию на кнопке добавления карточки [+]
-addButton.addEventListener('click', openCardPopup);
+//addButton.addEventListener('click', openCardPopup);
+
+addButton.addEventListener('click', () => {
+  //popupWithForm.setEventListeners();
+  cardFormValidator.disableSubmitButton();
+  const popupWithForm = new PopupWithForm('.popup_add', (evt) => {
+    evt.preventDefault();
+    addCard();
+    popupWithForm.close();
+  });
+  popupWithForm.open();
+});

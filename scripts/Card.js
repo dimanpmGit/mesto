@@ -1,11 +1,8 @@
-import { openPopup } from '../utils/utils.js';
-import { imagePopup, popupImage, popupImageName } from './constants.js';
-import PopupWithImage from './PopupWithImage.js';
-
-class Card {
-  constructor(initialCardElement, cardTemplateSelector){
+export default class Card {
+  constructor(initialCardElement, cardTemplateSelector, handleCardClick){
     this._cardParams = initialCardElement;
     this._cardTemplateSelector = cardTemplateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   ////////////////////////////////
@@ -63,8 +60,7 @@ class Card {
 
     //  Просмотр фотографии карточки
     const cardImage = this._newCard.querySelector('.element__image');
-    const popupWithImage = new PopupWithImage('.popup_card', this._cardParams);
-    cardImage.addEventListener('click', popupWithImage.open.bind(popupWithImage));
+    cardImage.addEventListener('click', () => this._handleCardClick());
   }
 
   //  Создание одной карточки
@@ -77,5 +73,3 @@ class Card {
   }
 
 }
-
-export default Card;

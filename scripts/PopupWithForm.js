@@ -1,6 +1,4 @@
 import Popup from "./Popup.js";
-import { page, validationConfig, cardForm, buttonCloseList } from "../scripts/constants.js";
-
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, formSubmiter) {

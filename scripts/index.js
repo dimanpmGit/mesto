@@ -2,13 +2,12 @@ import Card from './Card.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import {
-  initialCards, profilePopup, cardPopup, profilePopupContainer, cardForm, 
-  cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, 
-  inputBottomAdd, inputTopEdit, inputBottomEdit, cardsContainer, buttonCloseList, validationConfig
+  initialCards, profilePopup, cardPopup, editButton, addButton, inputTopEdit, inputBottomEdit, validationConfig
 }
 from "./constants.js";
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
+import PopupWithImage from './PopupWithImage.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -18,7 +17,7 @@ import UserInfo from './UserInfo.js';
 const cardsList = new Section({
     items: initialCards.reverse(),
     renderer: (cardItem) => {
-      const card = new Card(cardItem);
+      const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
       cardsList.addItem(card.getView());
     }
   },
@@ -35,7 +34,7 @@ cardFormValidator.enableValidation();
 
 //  Добавление карточки
 function addCard(cardItem) {
-  const card = new Card(cardItem);
+  const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
   cardsList.addItem(card.getView());
 }
 
@@ -46,6 +45,12 @@ function openCardPopup() {
     popupWithForm.close();
   });
   popupWithForm.open();
+}
+
+//  Открытие карточки на весь экран
+function imagePopupOpen(cardItem) {
+  const popupWithImage = new PopupWithImage('.popup_card', cardItem);
+  popupWithImage.open();
 }
 
 //////////////////////////////////
@@ -61,8 +66,6 @@ const userInfo = new UserInfo({
 
 //  Открытие попапа по нажатию на кнопке редактирования профиля
 const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
-    //profileName.textContent = inputTopEdit.value;
-    //profileDesc.textContent = inputBottomEdit.value;
     userInfo.setUserInfo({
       name: inputValues['popup-name'],
       description: inputValues['popup-description']
@@ -73,9 +76,6 @@ const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
 editProfilePopup.setEventListeners();
 
 editButton.addEventListener('click', () => {
-
-  //inputTopEdit.value = profileName.textContent;
-  //inputBottomEdit.value = profileDesc.textContent;
   profileFormValidator.enableSubmitButton();
   const userInfoData = userInfo.getUserInfo();
   inputTopEdit.value = userInfoData['name'];

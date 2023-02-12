@@ -39,20 +39,12 @@ function addCard(cardItem) {
   const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
   cardsList.addItem(card.getView());
 }
-/*
-//  Открытие формы добавления карточки
-function openCardPopup() {
-  const popupWithForm = new PopupWithForm('.popup_add', (inputValues) => {
-    addCard(inputValues);
-    popupWithForm.close();
-  });
-  popupWithForm.open();
-}*/
 
 //  Открытие карточки на весь экран
 function imagePopupOpen(cardItem) {
-  const popupWithImage = new PopupWithImage('.popup_card', cardItem);
-  popupWithImage.open();
+  const popupWithImage = new PopupWithImage('.popup_card');
+  popupWithImage.setEventListeners();
+  popupWithImage.open(cardItem);
 }
 
 //////////////////////////////////

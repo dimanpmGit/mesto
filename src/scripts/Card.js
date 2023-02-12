@@ -10,7 +10,7 @@ export default class Card {
   ////////////////////////////////
   _getTemplate() {
     const card = document
-      .querySelector('#card-item-template')
+      .querySelector(this._cardTemplateSelector)
       .content
       .querySelector('.element')
       .cloneNode(true);
@@ -22,20 +22,16 @@ export default class Card {
   //  Присваивание значений элементам карточки //
   ///////////////////////////////////////////////
   _setData(){
-    const cardName = this._newCard.querySelector('.element__name');
-    cardName.textContent = this._cardParams.name;
-
-    const cardImage = this._newCard.querySelector('.element__image');
-    cardImage.setAttribute('src', this._cardParams.link);
-    cardImage.setAttribute('alt', this._cardParams.name);
+    this._cardName.textContent = this._cardParams.name;
+    this._cardImage.setAttribute('src', this._cardParams.link);
+    this._cardImage.setAttribute('alt', this._cardParams.name);
   }
 
   ////////////////////
   //  Лайк карточки //
   ////////////////////
   _likeCard(){
-    const heartButton = this._newCard.querySelector('.element__heart-button');
-    heartButton.classList.toggle('element__heart-button_active');
+    this._heartButton.classList.toggle('element__heart-button_active');
   }
 
   ///////////////////////
@@ -51,21 +47,22 @@ export default class Card {
   //////////////////////////////////
   _setEventListeners(){
     //  Лайк карточки
-    const heartButton = this._newCard.querySelector('.element__heart-button');
-    heartButton.addEventListener('click', () => this._likeCard());
+    this._heartButton.addEventListener('click', () => this._likeCard());
 
     //  Удаление карточки
-    const trashButton = this._newCard.querySelector('.element__trash-button');
-    trashButton.addEventListener('click', () => this._deleteCard());
+    this._trashButton.addEventListener('click', () => this._deleteCard());
 
     //  Просмотр фотографии карточки
-    const cardImage = this._newCard.querySelector('.element__image');
-    cardImage.addEventListener('click', () => this._handleCardClick());
+    this._cardImage.addEventListener('click', () => this._handleCardClick());
   }
 
   //  Создание одной карточки
   getView(){
     this._newCard = this._getTemplate();
+    this._cardImage = this._newCard.querySelector('.element__image');
+    this._cardName = this._newCard.querySelector('.element__name');
+    this._heartButton = this._newCard.querySelector('.element__heart-button');
+    this._trashButton = this._newCard.querySelector('.element__trash-button');
     this._setData();
     this._setEventListeners();
 

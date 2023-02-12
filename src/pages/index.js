@@ -3,9 +3,7 @@ import '../pages/index.css';
 import Card from '../scripts/Card.js';
 import Section from '../scripts/Section.js';
 import FormValidator from '../scripts/FormValidator.js';
-import {
-  initialCards, profilePopup, cardPopup, editButton, addButton, inputTopEdit, inputBottomEdit, validationConfig
-}
+import { initialCards, profilePopup, cardPopup, editButton, addButton, validationConfig }
 from "../utils/constants.js";
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
@@ -15,12 +13,18 @@ import PopupWithImage from '../scripts/PopupWithImage.js';
 //  Функционал страницы //
 //////////////////////////
 
+function createCard(item) {
+  const card = new Card(item, '#card-item-template', () => imagePopupOpen(item));
+  const cardElement = card.getView();
+  return cardElement;
+}
+
 //  Добавление карточек при загрузке страницы
 const cardsList = new Section({
     items: initialCards.reverse(),
     renderer: (cardItem) => {
-      const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
-      cardsList.addItem(card.getView());
+      const card = createCard(cardItem);
+      cardsList.addItem(card);
     }
   },
   '.elements__list'
@@ -36,22 +40,21 @@ cardFormValidator.enableValidation();
 
 //  Добавление карточки
 function addCard(cardItem) {
-  const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
-  cardsList.addItem(card.getView());
+  const card = createCard(cardItem);
+  cardsList.addItem(card);
 }
 
 //  Открытие карточки на весь экран
+const popupWithImage = new PopupWithImage('.popup_card');
+popupWithImage.setEventListeners();
+
 function imagePopupOpen(cardItem) {
-  const popupWithImage = new PopupWithImage('.popup_card');
-  popupWithImage.setEventListeners();
   popupWithImage.open(cardItem);
 }
 
 //////////////////////////////////
 //  Обработка событий страницы  //
 //////////////////////////////////
-
-//  Обработка события submit формы добавления карточки
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name', 
@@ -61,8 +64,8 @@ const userInfo = new UserInfo({
 //  Открытие попапа по нажатию на кнопке редактирования профиля
 const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
     userInfo.setUserInfo({
-      name: inputValues['popup-name'],
-      description: inputValues['popup-description']
+      'popup-name': inputValues['popup-name'],
+      'popup-description': inputValues['popup-description']
     });
 
     editProfilePopup.close();
@@ -73,9 +76,7 @@ editButton.addEventListener('click', () => {
   profileFormValidator.resetValidation();
   profileFormValidator.enableSubmitButton();
   const userInfoData = userInfo.getUserInfo();
-  inputTopEdit.value = userInfoData['name'];
-  inputBottomEdit.value = userInfoData['description'];
-
+  editProfilePopup.setInputValues(userInfoData);
   editProfilePopup.open();
 });
 
@@ -87,5 +88,6 @@ const addCardPopup = new PopupWithForm('.popup_add', (inputValues) => {
 addCardPopup.setEventListeners();
 addButton.addEventListener('click', () => {
   cardFormValidator.resetValidation();
+  cardFormValidator.disableSubmitButton();
   addCardPopup.open();
 });

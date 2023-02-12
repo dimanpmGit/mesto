@@ -6,14 +6,14 @@ export default class UserInfo {
 
   getUserInfo() {
     const userInfo = {};
-    userInfo['name'] = this._userNameElement.textContent;
-    userInfo['description'] = this._userInfoElement.textContent;
+    userInfo['popup-name'] = this._userNameElement.textContent;
+    userInfo['popup-description'] = this._userInfoElement.textContent;
 
     return userInfo;
   }
 
   setUserInfo(userInfo) {
-    this._userNameElement.textContent = userInfo['name'];
-    this._userInfoElement.textContent = userInfo['description']; 
+    this._userNameElement.textContent = userInfo['popup-name'];
+    this._userInfoElement.textContent = userInfo['popup-description']; 
   }
 }

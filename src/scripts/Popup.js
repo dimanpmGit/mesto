@@ -1,5 +1,3 @@
-import { page } from "../utils/constants.js";
-
 export default class Popup {
   constructor( popupSelector ) {
     this._popup = document.querySelector(popupSelector);
@@ -30,7 +28,7 @@ export default class Popup {
     this._popup.classList.add('popup_opened');
 
     // Слушатель закрытия по нажатию кнопки Esc
-    page.addEventListener('keydown', this._handleEscClose);
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   // Закрытие попапа
@@ -38,6 +36,6 @@ export default class Popup {
     this._popup.classList.remove('popup_opened');
 
     //  Удаление слушателя нажатия Esc для закрытия попап
-    page.removeEventListener('keydown', this._handleEscClose);
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 }

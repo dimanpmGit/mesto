@@ -64,7 +64,6 @@ export default class FormValidator {
   //  Сброс сообщенний об ошибках при повторном открытии после закрытия
   //  формы с ошибками валидации
   _resetFormErrors() {
-    //this._formElement.querySelectorAll('.popup__input').forEach((inputElement) => {
       this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });

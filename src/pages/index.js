@@ -39,7 +39,7 @@ function addCard(cardItem) {
   const card = new Card(cardItem, '#card-item-template', () => imagePopupOpen(cardItem));
   cardsList.addItem(card.getView());
 }
-
+/*
 //  Открытие формы добавления карточки
 function openCardPopup() {
   const popupWithForm = new PopupWithForm('.popup_add', (inputValues) => {
@@ -47,7 +47,7 @@ function openCardPopup() {
     popupWithForm.close();
   });
   popupWithForm.open();
-}
+}*/
 
 //  Открытие карточки на весь экран
 function imagePopupOpen(cardItem) {
@@ -78,6 +78,7 @@ const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
 editProfilePopup.setEventListeners();
 
 editButton.addEventListener('click', () => {
+  profileFormValidator.resetValidation();
   profileFormValidator.enableSubmitButton();
   const userInfoData = userInfo.getUserInfo();
   inputTopEdit.value = userInfoData['name'];
@@ -93,6 +94,6 @@ const addCardPopup = new PopupWithForm('.popup_add', (inputValues) => {
 });
 addCardPopup.setEventListeners();
 addButton.addEventListener('click', () => {
-
+  cardFormValidator.resetValidation();
   addCardPopup.open();
 });

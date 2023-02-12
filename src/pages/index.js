@@ -1,15 +1,15 @@
 import '../pages/index.css';
 
-import Card from './Card.js';
-import Section from './Section.js';
-import FormValidator from './FormValidator.js';
+import Card from '../scripts/Card.js';
+import Section from '../scripts/Section.js';
+import FormValidator from '../scripts/FormValidator.js';
 import {
   initialCards, profilePopup, cardPopup, editButton, addButton, inputTopEdit, inputBottomEdit, validationConfig
 }
-from "./constants.js";
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
-import PopupWithImage from './PopupWithImage.js';
+from "../utils/constants.js";
+import PopupWithForm from '../scripts/PopupWithForm.js';
+import UserInfo from '../scripts/UserInfo.js';
+import PopupWithImage from '../scripts/PopupWithImage.js';
 
 //////////////////////////
 //  Функционал страницы //

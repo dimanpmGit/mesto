@@ -1,4 +1,4 @@
-import { page, buttonCloseList } from "./constants.js";
+import { page } from "../utils/constants.js";
 
 export default class Popup {
   constructor( popupSelector ) {

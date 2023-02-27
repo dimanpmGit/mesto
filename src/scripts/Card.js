@@ -25,6 +25,7 @@ export default class Card {
     this._cardName.textContent = this._cardParams.name;
     this._cardImage.setAttribute('src', this._cardParams.link);
     this._cardImage.setAttribute('alt', this._cardParams.name);
+    this._cardLikes.textContent = this._cardParams.likes.length;
   }
 
   ////////////////////
@@ -61,6 +62,7 @@ export default class Card {
     this._newCard = this._getTemplate();
     this._cardImage = this._newCard.querySelector('.element__image');
     this._cardName = this._newCard.querySelector('.element__name');
+    this._cardLikes = this._newCard.querySelector('.element__heart-likes');
     this._heartButton = this._newCard.querySelector('.element__heart-button');
     this._trashButton = this._newCard.querySelector('.element__trash-button');
     this._setData();

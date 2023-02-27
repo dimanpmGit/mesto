@@ -23,6 +23,8 @@
 @import url(../blocks/element/__trash-button/element__trash-button.css);
 @import url(../blocks/element/__heart-button/element__heart-button.css);
 @import url(../blocks/element/__heart-button/_active/element__heart-button_active.css);
+@import url(../blocks/element/__heart-block/element__heart-block.css);
+@import url(../blocks/element/__heart-likes/element__heart-likes.css);
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/footer/footer.css);

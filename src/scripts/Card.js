@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(initialCardElement, cardTemplateSelector, handleCardClick){
+  constructor(initialCardElement, cardTemplateSelector, handleCardClick, handleTrashlick){
     this._cardParams = initialCardElement;
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleTrashClick = handleTrashlick;
   }
 
   ////////////////////////////////
@@ -25,7 +26,15 @@ export default class Card {
     this._cardName.textContent = this._cardParams.name;
     this._cardImage.setAttribute('src', this._cardParams.link);
     this._cardImage.setAttribute('alt', this._cardParams.name);
-    this._cardLikes.textContent = this._cardParams.likes.length;
+    /*if (this._cardParams.likes) {
+      this._cardLikes.textContent = this._cardParams.likes.length;
+    }
+    else {
+      this._cardLikes.textContent = 0;
+    }*/
+    this._cardParams.likes?
+      (this._cardLikes.textContent = this._cardParams.likes.length):
+      (this._cardLikes.textContent = 0);
   }
 
   ////////////////////
@@ -51,7 +60,8 @@ export default class Card {
     this._heartButton.addEventListener('click', () => this._likeCard());
 
     //  Удаление карточки
-    this._trashButton.addEventListener('click', () => this._deleteCard());
+    //this._trashButton.addEventListener('click', () => this._deleteCard());
+    this._trashButton.addEventListener('click', () => this._handleTrashClick());
 
     //  Просмотр фотографии карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick());

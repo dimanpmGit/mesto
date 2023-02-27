@@ -4,11 +4,12 @@ import Api from '../scripts/Api.js';
 import Card from '../scripts/Card.js';
 import Section from '../scripts/Section.js';
 import FormValidator from '../scripts/FormValidator.js';
-import { initialCards, profilePopup, cardPopup, editButton, addButton, validationConfig }
+import { profilePopup, cardPopup, editButton, addButton, validationConfig }
 from "../utils/constants.js";
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
+import PopupForDelete from '../scripts/PopupForDelete.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -86,7 +87,7 @@ apiCards.getInfo()
 
     // Создание новой карточки
     function createCard(item) {
-      const card = new Card(item, '#card-item-template', () => imagePopupOpen(item));
+      const card = new Card(item, '#card-item-template', () => imagePopupOpen(item), () => deletePopupOpen());
       const cardElement = card.getView();
       return cardElement;
     }
@@ -166,6 +167,14 @@ popupWithImage.setEventListeners();
 
 function imagePopupOpen(cardItem) {
   popupWithImage.open(cardItem);
+}
+
+// Открытие попапа удаления карточки
+const popupForDelete = new PopupForDelete('.popup_delete');
+popupForDelete.setEventListeners();
+
+function deletePopupOpen() {
+  popupForDelete.open();
 }
 
 //////////////////////////////////

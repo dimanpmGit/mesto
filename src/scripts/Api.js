@@ -55,4 +55,20 @@ export default class Api {
     })
       .then(handleResponse)
   }
+
+  likeCard(id) {
+    return fetch(`${this.urlForCards}/${id}/likes`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+      .then(handleResponse)
+  }
+
+  unlikeCard(id) {
+    return fetch(`${this.urlForCards}/${id}/likes`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+      .then(handleResponse)
+  }
 }

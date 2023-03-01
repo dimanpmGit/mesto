@@ -1,9 +1,11 @@
 export default class Card {
-  constructor(initialCardElement, cardTemplateSelector, { handleCardClick, handleTrashClick, userId}){
+  constructor(initialCardElement, cardTemplateSelector, { handleCardClick, handleTrashClick, handleLikeCard, handleUnlikeCard, userId}){
     this._cardParams = initialCardElement;
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleCardClick = handleCardClick;
     this._handleTrashClick = handleTrashClick;
+    this._handleLikeCard = handleLikeCard;
+    this._handleUnlikeCard = handleUnlikeCard;
     this._userId = userId;
     this._id = initialCardElement._id;
     'owner' in this._cardParams ? this._cardOwnerId = this._cardParams.owner._id : this._cardOwnerId = this._userId;
@@ -36,7 +38,17 @@ export default class Card {
   //  Лайк карточки //
   ////////////////////
   _likeCard(){
-    this._heartButton.classList.toggle('element__heart-button_active');
+    //this._heartButton.classList.toggle('element__heart-button_active');
+    this._heartButton.classList.add('element__heart-button_active');
+    this._cardLikes.textContent = Number(this._cardLikes.textContent) + 1;
+  }
+
+  ///////////////////////
+  //  Дизлайк карточки //
+  ///////////////////////
+  _unlikeCard() {
+    this._heartButton.classList.remove('element__heart-button_active');
+    this._cardLikes.textContent = Number(this._cardLikes.textContent) - 1;
   }
 
   ///////////////////////
@@ -52,7 +64,17 @@ export default class Card {
   //////////////////////////////////
   _setEventListeners(){
     //  Лайк карточки
-    this._heartButton.addEventListener('click', () => this._likeCard());
+    //this._heartButton.addEventListener('click', () => this._likeCard());
+    this._heartButton.addEventListener('click', () => {
+      if (this._heartButton.classList.contains('element__heart-button_active')) {
+        this._unlikeCard();
+        this._handleUnlikeCard();
+      }
+      else {
+        this._likeCard();
+        this._handleLikeCard();
+      }
+    });
 
     //  Удаление карточки
     if (this._cardOwnerId === this._userId) {
@@ -75,6 +97,14 @@ export default class Card {
     this._setData();
     this._setEventListeners();
 
+    this._cardParams.likes.forEach((like) => {
+      if (like._id === this._userId) {
+        this._heartButton.classList.add('element__heart-button_active');
+      }
+      else {
+        this._heartButton.classList.remove('element__heart-button_active');
+      }
+    })
     return this._newCard;
   }
 }

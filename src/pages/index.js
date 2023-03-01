@@ -105,7 +105,17 @@ api.getUserInfo()
               }, 
               handleTrashClick: () => {
                 deletePopupOpen(card);
-              }, 
+              },
+              handleLikeCard: () => {
+                api.likeCard(item._id)
+                  .then((res) => {
+                  })
+              },
+              handleUnlikeCard: () => {
+                api.likeCard(item._id)
+                  .then((res) => {
+                  })
+              },
               userId: userInfo.getUserId()
             });
 

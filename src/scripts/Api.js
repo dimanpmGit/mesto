@@ -8,19 +8,21 @@ const handleResponse = (res) => {
 export default class Api {
   constructor(config) {
     this.url = config.url;
+    this.urlForCards = `${this.url}/cards`;
+    this.urlForUser = `${this.url}/users/me`;
     this.headers = config.headers;
   }
 
-  getInfo() {
-    return fetch(this.url, {
+  getUserInfo() {
+    return fetch(this.urlForUser, {
       headers: this.headers
     })
       .then(handleResponse)
   }
 
-  updateInfo(data) {
+  updateUserInfo(data) {
     return fetch(
-      this.url,
+      this.urlForUser,
       {
         method: 'PATCH',
         headers: this.headers,
@@ -30,11 +32,26 @@ export default class Api {
       .then(handleResponse)
   }
 
+  getCardsData() {
+    return fetch(this.urlForCards, {
+      headers: this.headers
+    })
+      .then(handleResponse)
+  }
+
   createCard(data) {
-    return fetch(this.url, {
+    return fetch(this.urlForCards, {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify(data)
+    })
+      .then(handleResponse)
+  }
+
+  deleteCard(id) {
+    return fetch(`${this.urlForCards}/${id}`, {
+      method: 'DELETE',
+      headers: this.headers
     })
       .then(handleResponse)
   }

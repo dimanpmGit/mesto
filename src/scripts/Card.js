@@ -1,9 +1,12 @@
 export default class Card {
-  constructor(initialCardElement, cardTemplateSelector, handleCardClick, handleTrashlick){
+  constructor(initialCardElement, cardTemplateSelector, { handleCardClick, handleTrashClick, userId}){
     this._cardParams = initialCardElement;
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleCardClick = handleCardClick;
-    this._handleTrashClick = handleTrashlick;
+    this._handleTrashClick = handleTrashClick;
+    this._userId = userId;
+    this._id = initialCardElement._id;
+    'owner' in this._cardParams ? this._cardOwnerId = this._cardParams.owner._id : this._cardOwnerId = this._userId;
   }
 
   ////////////////////////////////
@@ -26,15 +29,7 @@ export default class Card {
     this._cardName.textContent = this._cardParams.name;
     this._cardImage.setAttribute('src', this._cardParams.link);
     this._cardImage.setAttribute('alt', this._cardParams.name);
-    /*if (this._cardParams.likes) {
-      this._cardLikes.textContent = this._cardParams.likes.length;
-    }
-    else {
-      this._cardLikes.textContent = 0;
-    }*/
-    this._cardParams.likes?
-      (this._cardLikes.textContent = this._cardParams.likes.length):
-      (this._cardLikes.textContent = 0);
+    this._cardParams.likes ? (this._cardLikes.textContent = this._cardParams.likes.length):(this._cardLikes.textContent = 0);
   }
 
   ////////////////////
@@ -47,7 +42,7 @@ export default class Card {
   ///////////////////////
   // Удаление карточки //
   ///////////////////////
-  _deleteCard(){
+  deleteCard() {
     this._newCard.remove();
     this._newCard = null;
   }
@@ -60,8 +55,10 @@ export default class Card {
     this._heartButton.addEventListener('click', () => this._likeCard());
 
     //  Удаление карточки
-    //this._trashButton.addEventListener('click', () => this._deleteCard());
-    this._trashButton.addEventListener('click', () => this._handleTrashClick());
+    if (this._cardOwnerId === this._userId) {
+      this._trashButton.classList.add('element__trash-button_type_visible');
+      this._trashButton.addEventListener('click', () => this._handleTrashClick());
+    }
 
     //  Просмотр фотографии карточки
     this._cardImage.addEventListener('click', () => this._handleCardClick());

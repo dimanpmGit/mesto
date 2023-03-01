@@ -12,7 +12,7 @@ export default class Section {
   }
 
   //  Добавление карточки на страницу
-  addItem(element) {
+  renderElement(element) {
     this._container.prepend(element);
   }
 }

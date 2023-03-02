@@ -1,6 +1,7 @@
 export default class Popup {
   constructor( popupSelector ) {
     this._popup = document.querySelector(popupSelector);
+    this._popupButton = this._popup.querySelector('.popup__save-button');
   }
 
   // Закрытие попапа клавишей Esc
@@ -37,5 +38,17 @@ export default class Popup {
 
     //  Удаление слушателя нажатия Esc для закрытия попап
     document.removeEventListener('keydown', this._handleEscClose);
+  }
+
+  // Отображение статуса загрузки
+  renderLoading(isLoading) {
+    const loadindText = 'Сохранение...';
+    const buttonText = this._popupButton.textContent;
+    if (isLoading) {
+      this._popupButton.textContent = loadindText;
+    }
+    else {
+      this._popupButton.textContent = buttonText;
+    }
   }
 }

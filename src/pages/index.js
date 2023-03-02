@@ -32,6 +32,7 @@ api.getUserInfo()
     userInfo.setUserInfo();
     //  Открытие попапа по нажатию на кнопке редактирования профиля
     const editProfilePopup = new PopupWithForm('.popup_edit', (inputValues) => {
+      editProfilePopup.renderLoading(true);
       api.updateUserInfo({
         'name': inputValues['popup-name'],
         'about': inputValues['popup-description']
@@ -41,6 +42,9 @@ api.getUserInfo()
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        editProfilePopup.renderLoading(false);
       })
 
       userInfo.updateUserInfo({
@@ -77,12 +81,16 @@ api.getUserInfo()
         //  Открытие попапа по нажатию на кнопке добавления карточки [+]
         const addCardPopup = new PopupWithForm('.popup_add', (inputValues) => {
           //  Добавление карточки
+          addCardPopup.renderLoading(true);
           api.createCard(inputValues)
             .then((data) => {
               addCard(data);
             })
             .catch((err) => {
               console.log(err);
+            })
+            .finally(() => {
+              addCardPopup.renderLoading(false);
             })
           addCardPopup.close();
         });
@@ -103,12 +111,16 @@ api.getUserInfo()
         // Создание попапа для обновления аватарки
         const avatarModifyPopup = new PopupWithAvatar('.popup_avatar', {
           handleUpdateAvatar: (linkObj) => {
+            avatarModifyPopup.renderLoading(true);
             api.changeAvatar(linkObj)
               .then((answer) => {
                 userInfo.setNewAvatar(answer.avatar);
               })
               .catch((err) => {
                 console.log(err);
+              })
+              .finally(() => {
+                avatarModifyPopup.renderLoading(false);
               })
             avatarModifyPopup.close();
           }
@@ -155,6 +167,7 @@ api.getUserInfo()
         // Создание попапа для подтверждения удаления карточки
         const popupForDelete = new PopupForDelete('.popup_delete', {
           handleYesDelete: (card) => {
+            popupForDelete.renderLoading(true);
               api.deleteCard(card._cardParams._id)
                 .then(() => {
                   card.deleteCard();
@@ -162,6 +175,9 @@ api.getUserInfo()
                 })
                 .catch((err) => {
                   console.log(err);
+                })
+                .finally(() => {
+                  popupForDelete.renderLoading(false);
                 })
             }
         });

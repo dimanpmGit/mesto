@@ -4,7 +4,7 @@ export default class PopupWithAvatar extends Popup {
   constructor(popupSelector, { handleUpdateAvatar }) {
     super(popupSelector);
     this._popupForm = this._popup.querySelector('.popup__form');
-    this._link = this._popupForm.querySelector('#avatar-url');
+    this._link = this._popupForm.querySelector('.popup__input');
     this._handleUpdateAvatar = handleUpdateAvatar;
     this._avatarLink = {}
   }

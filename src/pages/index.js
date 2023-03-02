@@ -4,12 +4,13 @@ import Api from '../scripts/Api.js';
 import Card from '../scripts/Card.js';
 import Section from '../scripts/Section.js';
 import FormValidator from '../scripts/FormValidator.js';
-import { config, profilePopup, cardPopup, editButton, addButton, validationConfig }
+import { config, profilePopup, cardPopup, editButton, addButton, validationConfig, avatarDoc, avatarPopupDoc }
 from "../utils/constants.js";
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupForDelete from '../scripts/PopupForDelete.js';
+import PopupWithAvatar from '../scripts/PopupWithAvatar.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -22,7 +23,7 @@ api.getUserInfo()
     const userInfo = new UserInfo({
       userNameSelector: '.profile__name', 
       userInfoSelector: '.profile__description',
-      userAvatarSelector: '.profile__avatar'
+      userAvatarSelector: '.profile__avatar-image'
       },
       data
     )
@@ -50,6 +51,7 @@ api.getUserInfo()
       
     editProfilePopup.setEventListeners();
 
+    // Слушатель нажатия кнопки редактирования профиля
     editButton.addEventListener('click', () => {
       profileFormValidator.resetValidation();
       profileFormValidator.enableSubmitButton();
@@ -85,12 +87,33 @@ api.getUserInfo()
           addCardPopup.close();
         });
 
+        // Слушатель нажатия кнопки [+]
         addCardPopup.setEventListeners();
         addButton.addEventListener('click', () => {
           cardFormValidator.resetValidation();
           cardFormValidator.disableSubmitButton();
           addCardPopup.open();
         });
+
+        // Слушатель нажатия на аватар
+        avatarDoc.addEventListener('click', () => {
+          avatarModifyPopup.open();
+        })
+
+        // Создание попапа для обновления аватарки
+        const avatarModifyPopup = new PopupWithAvatar('.popup_avatar', {
+          handleUpdateAvatar: (linkObj) => {
+            api.changeAvatar(linkObj)
+              .then((answer) => {
+                userInfo.setNewAvatar(answer.avatar);
+              })
+              .catch((err) => {
+                console.log(err);
+              })
+            avatarModifyPopup.close();
+          }
+        });
+        avatarModifyPopup.setEventListeners();
 
         function addCard(cardItem) {
           const card = createCard(cardItem);
@@ -110,10 +133,16 @@ api.getUserInfo()
                 api.likeCard(item._id)
                   .then((res) => {
                   })
+                  .catch((err) => {
+                    console.log(err);
+                  })
               },
               handleUnlikeCard: () => {
-                api.likeCard(item._id)
+                api.unlikeCard(item._id)
                   .then((res) => {
+                  })
+                  .catch((err) => {
+                    console.log(err);
                   })
               },
               userId: userInfo.getUserId()
@@ -151,11 +180,17 @@ api.getUserInfo()
     console.log(err);
   })
 
+//////////////////////////////////////////////////////////////////////////////
+// Валидация форм                                                           //
+//////////////////////////////////////////////////////////////////////////////
 const profileFormValidator = new FormValidator(validationConfig, profilePopup);
 profileFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopup);
 cardFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(validationConfig, avatarPopupDoc);
+avatarFormValidator.enableValidation();
 
 //  Открытие карточки на весь экран
 const popupWithImage = new PopupWithImage('.popup_card');

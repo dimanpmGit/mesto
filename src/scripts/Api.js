@@ -71,4 +71,14 @@ export default class Api {
     })
       .then(handleResponse)
   }
+
+  changeAvatar(data) {
+    return fetch(`${this.urlForUser}/avatar`,
+      {
+        method: 'PATCH',
+        headers: this.headers,
+        body: JSON.stringify(data)
+      })
+      .then(handleResponse)
+  }
 }

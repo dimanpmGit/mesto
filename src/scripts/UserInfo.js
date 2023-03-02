@@ -29,6 +29,10 @@ export default class UserInfo {
     this._userAvatar.setAttribute('alt', this._name);
   }
 
+  setNewAvatar(link) {
+    this._userAvatar.setAttribute('src', link);
+  }
+
   getUserId() {
     return this._id;
   }

@@ -15,7 +15,9 @@
     <main class="content">
         <section class="profile">
           <div class="profile__info-wrapper">
-            <img class="profile__avatar">
+            <button class="profile__avatar" type="button">
+              <img class="profile__avatar-image">
+            </button>  
             <div class="profile__info">
               <div class="profile__name-wrapper">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -76,6 +78,17 @@
         <h2 class="popup__title">Вы уверены?</h2>
         <form class="popup__form" name="popup-form-delete" novalidate>
           <button class="popup__save-button popup__save-button_type_delete" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <button class="popup__close-button link" aria-label="Close" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="popup-form-delete" novalidate>
+          <input id="avatar-url" class="popup__input popup__input_type_avatar" name="link" type="url"
+            placeholder="Ссылка на аватар" required>
+          <button class="popup__save-button popup__save-button_type_avatar" type="submit">Сохранить</button>
         </form>
       </div>
     </div>

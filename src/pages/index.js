@@ -4,13 +4,12 @@ import Api from '../scripts/Api.js';
 import Card from '../scripts/Card.js';
 import Section from '../scripts/Section.js';
 import FormValidator from '../scripts/FormValidator.js';
-import { config, profilePopup, cardPopup, editButton, addButton, validationConfig, avatarDoc, avatarPopupDoc }
+import { config, profilePopup, cardPopup, editButton, addButton, validationConfig, deletePopupDoc, avatarDoc, avatarPopupDoc }
 from "../utils/constants.js";
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import UserInfo from '../scripts/UserInfo.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
 import PopupForDelete from '../scripts/PopupForDelete.js';
-import PopupWithAvatar from '../scripts/PopupWithAvatar.js';
 
 //////////////////////////
 //  Функционал страницы //
@@ -109,7 +108,7 @@ api.getUserInfo()
         })
 
         // Создание попапа для обновления аватарки
-        const avatarModifyPopup = new PopupWithAvatar('.popup_avatar', {
+        const avatarModifyPopup = new PopupWithForm('.popup_avatar', {
           handleUpdateAvatar: (linkObj) => {
             avatarModifyPopup.renderLoading(true);
             api.changeAvatar(linkObj)
@@ -144,6 +143,8 @@ api.getUserInfo()
               handleLikeCard: () => {
                 api.likeCard(item._id)
                   .then((res) => {
+                    card.likeCard(res.likes);
+                    //console.log();
                   })
                   .catch((err) => {
                     console.log(err);
@@ -152,6 +153,8 @@ api.getUserInfo()
               handleUnlikeCard: () => {
                 api.unlikeCard(item._id)
                   .then((res) => {
+                    card.unlikeCard(res.likes);
+                    //console.log(res);
                   })
                   .catch((err) => {
                     console.log(err);
@@ -204,6 +207,9 @@ profileFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopup);
 cardFormValidator.enableValidation();
+
+const deleteCardFormValidator = new FormValidator(validationConfig, deletePopupDoc);
+deleteCardFormValidator.enableValidation();
 
 const avatarFormValidator = new FormValidator(validationConfig, avatarPopupDoc);
 avatarFormValidator.enableValidation();

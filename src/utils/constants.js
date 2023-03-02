@@ -18,6 +18,7 @@ const popupImage = imagePopup.querySelector('.popup__image');
 const popupImageName = imagePopup.querySelector('.popup__image-name');
 const cardsContainer = document.querySelector('.elements__list');
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
+const deletePopupDoc = document.querySelector('.popup_delete');
 const avatarDoc = document.querySelector('.profile__avatar');
 const avatarPopupDoc = document.querySelector('.popup_avatar');
 
@@ -41,5 +42,5 @@ const config = {
 
 export {
   config, page, profilePopup, cardPopup, imagePopup, profilePopupContainer, profileForm, cardForm, cardPopupContainer, profileName, profileDesc, editButton, addButton, inputTopAdd, inputBottomAdd, inputTopEdit, inputBottomEdit, popupImage,
-  popupImageName, cardsContainer, buttonCloseList, validationConfig, avatarDoc, avatarPopupDoc
+  popupImageName, cardsContainer, buttonCloseList, validationConfig, deletePopupDoc, avatarDoc, avatarPopupDoc
 };

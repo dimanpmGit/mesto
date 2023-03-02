@@ -29,26 +29,25 @@ export default class Card {
   ///////////////////////////////////////////////
   _setData(){
     this._cardName.textContent = this._cardParams.name;
-    this._cardImage.setAttribute('src', this._cardParams.link);
-    this._cardImage.setAttribute('alt', this._cardParams.name);
+    this._cardImage.src = this._cardParams.link;
+    this._cardImage.alt = this._cardParams.name;
     this._cardParams.likes ? (this._cardLikes.textContent = this._cardParams.likes.length):(this._cardLikes.textContent = 0);
   }
 
   ////////////////////
   //  Лайк карточки //
   ////////////////////
-  _likeCard(){
-    //this._heartButton.classList.toggle('element__heart-button_active');
+  likeCard(likesArray){
     this._heartButton.classList.add('element__heart-button_active');
-    this._cardLikes.textContent = Number(this._cardLikes.textContent) + 1;
+    this._cardLikes.textContent = likesArray.length;
   }
 
   ///////////////////////
   //  Дизлайк карточки //
   ///////////////////////
-  _unlikeCard() {
+  unlikeCard(likesArray) {
     this._heartButton.classList.remove('element__heart-button_active');
-    this._cardLikes.textContent = Number(this._cardLikes.textContent) - 1;
+    this._cardLikes.textContent = likesArray.length;
   }
 
   ///////////////////////
@@ -64,14 +63,11 @@ export default class Card {
   //////////////////////////////////
   _setEventListeners(){
     //  Лайк карточки
-    //this._heartButton.addEventListener('click', () => this._likeCard());
     this._heartButton.addEventListener('click', () => {
       if (this._heartButton.classList.contains('element__heart-button_active')) {
-        this._unlikeCard();
         this._handleUnlikeCard();
       }
       else {
-        this._likeCard();
         this._handleLikeCard();
       }
     });

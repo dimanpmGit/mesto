@@ -108,8 +108,7 @@ api.getUserInfo()
         })
 
         // Создание попапа для обновления аватарки
-        const avatarModifyPopup = new PopupWithForm('.popup_avatar', {
-          handleUpdateAvatar: (linkObj) => {
+        const avatarModifyPopup = new PopupWithForm('.popup_avatar', (linkObj) => {
             avatarModifyPopup.renderLoading(true);
             api.changeAvatar(linkObj)
               .then((answer) => {
@@ -122,7 +121,6 @@ api.getUserInfo()
                 avatarModifyPopup.renderLoading(false);
               })
             avatarModifyPopup.close();
-          }
         });
         avatarModifyPopup.setEventListeners();
 

@@ -142,7 +142,6 @@ api.getUserInfo()
                 api.likeCard(item._id)
                   .then((res) => {
                     card.likeCard(res.likes);
-                    //console.log();
                   })
                   .catch((err) => {
                     console.log(err);
@@ -152,7 +151,6 @@ api.getUserInfo()
                 api.unlikeCard(item._id)
                   .then((res) => {
                     card.unlikeCard(res.likes);
-                    //console.log(res);
                   })
                   .catch((err) => {
                     console.log(err);

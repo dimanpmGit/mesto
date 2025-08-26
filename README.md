@@ -34,3 +34,13 @@
 **GitHub Pages**
 
 * [Ссылка на GitHub Pages](https://dimanpmgit.github.io/mesto/)
+
+
+**Макет**
+
+* [Ссылка на макет](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на дизайн попапа](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint?node-id=0%3A1)
+
+**Чеклист**
+
+* [Ссылка на чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-9.pdf)
